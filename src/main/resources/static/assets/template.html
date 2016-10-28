@@ -1,0 +1,12 @@
+<tr>
+	<th ng-repeat="row in info">
+			<input ng-model="attr[row.input]" my-enter="someCtrlFn()" placeholder="{{row.name}}" type="{{row.type}}"/>
+	</th>
+</tr>
+<tr>
+	<th data-ng-repeat="row in info"><b>{{row.name}}</b> 
+	  	<a href="#" data-ng-click="order(row)">
+						<i class="{{row.sortIcon}}"></i>
+				</a>
+	</th>
+</tr>	
