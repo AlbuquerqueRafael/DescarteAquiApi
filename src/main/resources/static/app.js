@@ -1,5 +1,2 @@
-angular.module("descarteaqui", 
-	['smart-table', 
-	 'ui.bootstrap'
-	 ]);
+angular.module("descarteaqui", ['daTable']);
 

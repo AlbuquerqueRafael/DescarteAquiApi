@@ -1,20 +1,33 @@
-angular.module("descarteaqui").directive("myTable", function(companyService) {
+angular.module("daTable")
+
+.controller("testeController", function($scope){
+	var myTable = this;
+	
+	this.gg = "Assim vc me mata";
+	this.getDataServer = function(){
+		$scope.state.start = myTable.state.start;
+		$scope.state.lengthTable = myTable.state.lengthTable;
+		$scope.state.varSort = myTable.state.varSort;
+		$scope.state.sortValue = myTable.state.sortValue;
+		$scope.someCtrlFn();
+	}
+})
+
+.directive("myTable", function() {
 	return {
         restrict: "A",
-        replace: false,
+        replace: true,
+        controller: 'testeController',
         scope: {
         	someCtrlFn: '&callbackFn',
-        	data: '='
+        	data: '=',
+        	state: '='
         },
-        link: function($scope, attr, element){
-        	$scope.numPages = 2;
-        	$scope.totalItens = 50;
-        	$scope.currentPage = 1;
+        link: function($scope, element, attr, myTable){
+        	myTable.state = {};
+        	myTable.data = $scope.data;
+        	myTable.ufa = $scope.someCtrlFn;
         	
-        	$scope.$watch('data', function(newValue, oldValue) {
-        		console.log($scope.data.length)
-        		$scope.totalItens = $scope.data.length
-        	});
-        }	
+        }
     };
 });

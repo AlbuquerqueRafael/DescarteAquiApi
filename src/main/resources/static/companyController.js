@@ -14,12 +14,13 @@ angular.module("descarteaqui").controller("companyController", function ($scope,
 	
 	init();
 	
+	$scope.state = {}
 	$scope.company = {}
 	
-
-	$scope.getData = function(){
+	$scope.getCompanyData = function(){
 		companyService.getAllCompanies().then(function successCallback(response) {
-			console.log(response)
+			console.log($scope.state)
+			console.log(response);
 			$scope.data = response.data;
 		}, function errorCallback(response) {
 			console.log(response)

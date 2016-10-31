@@ -1,28 +1,30 @@
-angular.module("descarteaqui").directive("myPagination", function(companyService) {
+angular.module("daTable").directive("myPagination", function(companyService) {
 	return {
         templateUrl: 'assets/paginationTemplate.html',
-        restrict: "E",
+        restrict: "EA",
         replace: false,
-        scope: {
-        	someCtrlFn: '&callbackFn',
-        	data: '='
-        },
-        link: function($scope, attr){
-        	$scope.totalItens = 100;
+    	require: '^myTable',
+        scope: {},
+        link: function($scope, element, attr, myTable, $watch){   
+        	$scope.totalItens = $scope.$parent.data.length;
         	$scope.currentPage = 1;
-        	$scope.maxSize = 2;
-        	$scope.itensPerPage = 1;
+        	$scope.maxSize = 5;
+        	$scope.itensPerPage = myTable.state.lengthTable;
         	
+        	myTable.state.start = $scope.currentPage;
         	
         	$scope.$watch('currentPage', function(newValue, oldValue) {
         		if (newValue !== oldValue) {
-        			$scope.someCtrlFn();
+        			myTable.state.start = $scope.currentPage;
+        			myTable.getDataServer();
     			}
         	});
-        	
-        	$scope.$watch('data', function(newValue, oldValue) {
+        	  	
+        	$scope.$parent.$watch('data', function(newValue, oldValue) {
         		if (newValue !== oldValue) {
-        			$scope.totalItens = $scope.data.length
+        			$scope.itensPerPage = myTable.state.lengthTable;
+        			$scope.totalItens = $scope.$parent.data.length;
+        			
     			}
         	});
         }

@@ -7,36 +7,38 @@
 		<script src="/assets/libs/angular/angular.min.js"></script>
 		<script src="/assets/libs/smart-table/smart-table.min.js"></script>
 		<script src="/assets/libs/boostrap/ui-bootstrap-tpls-2.2.0.min.js"></script>
-		<script src="app.js"></script>
-		<script src="companyService.js"></script>
-		<script src="companyController.js"></script>
+		<script src="daTable.js"></script>
 		<script src="tableDirective.js"></script>
-		<script src="tableheaderDirective.js"></script>
+		<script src="thOrderDirective.js"></script>
 		<script src="numElemPagesDirective.js"></script>
 		<script src="enterSearchDirective.js"></script>
 		<script src="paginationDirective.js"></script>
 		<script src="tableBodyDirective.js"></script>
+		<script src="thSearchDirective.js"></script>
+				<script src="app.js"></script>
+		<script src="companyService.js"></script>
+		<script src="companyController.js"></script>
 	</head>
 	
 	<body ng-controller="companyController">
-		<div class="container">
-		<!-- <div class="btn-group">
-       <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'10'">10</label>
-       <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'25'">25</label>
-       <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'50'">50</label>
-   </div> -->
-   <my-num-elements></my-num-elements>
-			<table my-table 
-										data="data" 
-										callback-fn="getData()"
-										class="table table-bordered">
-										
-						<thead my-header attr="company" info="info" callback-fn="getData()"></thead>
+		<div my-table 
+							data="data" 
+							state="state"
+							callback-fn="getCompanyData()" 
+							class="container">
+   	
+   	<my-num-elements></my-num-elements>
+				<table class="table table-bordered">
+						<thead>
+							<tr my-search-header attr="company" info="info"> </tr>
+							<tr my-order-header info="info"> </tr>
+						</thead>
 		    <tbody my-body data="data"></tbody>
   		</table>
- 			<my-pagination data="data" callback-fn="getData()"></my-pagination>
+ 			<my-pagination></my-pagination>
 			</div>
-</body>
 
+			
+</body>
 
 </html>

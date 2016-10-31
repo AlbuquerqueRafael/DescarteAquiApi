@@ -1,4 +1,4 @@
-angular.module("descarteaqui").directive('myEnter', function () {
+angular.module("daTable").directive('myEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if(event.which === 13) {
