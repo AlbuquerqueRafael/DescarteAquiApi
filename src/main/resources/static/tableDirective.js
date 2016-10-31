@@ -2,8 +2,8 @@ angular.module("daTable")
 
 .controller("testeController", function($scope){
 	var myTable = this;
-	
-	this.gg = "Assim vc me mata";
+	$scope.state = {}
+
 	this.getDataServer = function(){
 		$scope.state.start = myTable.state.start;
 		$scope.state.lengthTable = myTable.state.lengthTable;

@@ -1,8 +1,11 @@
 angular.module("descarteaqui").controller("companyController", function ($scope, companyService) {
 	$scope.data = {}
-	
+	console.log()
 	var init = function(){
-		companyService.getAllCompanies().then(function successCallback(response) {
+		var state = $scope.state;
+		var company = $scope.company;
+		
+		companyService.getAllCompanies(company, state).then(function successCallback(response) {
 			$scope.data = response.data;
 		  }, function errorCallback(response) {
 			console.log(response)
@@ -13,17 +16,16 @@ angular.module("descarteaqui").controller("companyController", function ($scope,
 	};
 	
 	init();
-	
-	$scope.state = {}
 	$scope.company = {}
 	
 	$scope.getCompanyData = function(){
-		companyService.getAllCompanies().then(function successCallback(response) {
-			console.log($scope.state)
-			console.log(response);
+		var state = $scope.state;
+		var company = $scope.company;
+		
+		companyService.getAllCompanies(company, state).then(function successCallback(response) {
 			$scope.data = response.data;
 		}, function errorCallback(response) {
-			console.log(response)
+			console.log(response.data.message)
 		});
 	}
 	
