@@ -37,6 +37,7 @@ angular.module("daTable").directive("myOrderHeader", function() {
         		myTable.getDataServer();
         	};
         	
+          	console.log(myTable.state)
         }
     };
 });

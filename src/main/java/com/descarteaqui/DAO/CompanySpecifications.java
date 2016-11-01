@@ -14,24 +14,24 @@ import com.descarteaqui.domain.Company;
 
 public class CompanySpecifications {
 	
-	 public static Specification<Company> filterMultiCollumn(String name, String adress, String phone) {
+	 public static Specification<Company> filterMultiCollumn(Company company) {
 	    return new Specification<Company>() {
 	      @Override
 	      public Predicate toPredicate(Root<Company> root,
 	          CriteriaQuery<?> query, CriteriaBuilder builder) {
 	    	  List<Predicate> predicates = new ArrayList<Predicate>();
 	    	  
-	    	  if(name != null){
-	    		  predicates.add(builder.like(root.<String>get("name"), "%" + name + "%"));
+	    	  if(company.getName() != null){
+	    		  predicates.add(builder.like(builder.lower(root.<String>get("name")), "%" + company.getName().toLowerCase() + "%"));
 	    		
 	    	  }
 	    	  
-	    	  if(adress != null){
-	    		  predicates.add(builder.like(root.<String>get("adress"), "%" + adress + "%"));
+	    	  if(company.getAdress() != null){
+	    		  predicates.add(builder.like(builder.lower(root.<String>get("adress")), "%" + company.getAdress().toLowerCase() + "%"));
 	    	  }
 	    	  
-	  	      if(phone != null){
-	  	    	  predicates.add(builder.like(root.<String>get("phone"), "%" + phone + "%"));
+	  	      if(company.getPhone() != null){
+	  	    	  predicates.add(builder.like(builder.lower(root.<String>get("phone")), "%" + company.getPhone().toLowerCase() + "%"));
 	  	      }
 	  	      
 	  	      return builder.and(predicates.toArray(new Predicate[predicates.size()]));

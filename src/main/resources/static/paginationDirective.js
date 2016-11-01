@@ -27,6 +27,8 @@ angular.module("daTable").directive("myPagination", function(companyService) {
         			
     			}
         	});
+        	
+           	myTable.getDataServer();
         }
     };
 });

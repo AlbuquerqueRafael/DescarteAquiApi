@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,20 +35,25 @@ public class TesteController {
 	private CompanyDAO companyDAO;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public @ResponseBody List<Company> getHelloWorld(@RequestBody String str) throws JsonProcessingException, IOException{
+	public ResponseEntity<List<Company>> getHelloWorld(@RequestBody String searchData){
 		ObjectMapper mapper = new ObjectMapper();
-		JsonNode node =  mapper.readTree(str);
+		JsonNode node = null;
+		
+		try {
+			node = mapper.readTree(searchData);
+		} catch (IOException e) {
+			return new ResponseEntity<List<Company>>(HttpStatus.NOT_FOUND);
+		}
+		
 		Company company = mapper.convertValue(node.get("company"), Company.class);
 		State state = mapper.convertValue(node.get("state"), State.class);
-		System.out.println("Company name: " + company.getName());
-		System.out.println("State info: " + state.getLengthTable());
-		
-		PageRequest request = new PageRequest(0, 2, Sort.Direction.ASC, "name");
-		Specification<Company> specification = CompanySpecifications.filterMultiCollumn(null, null, "32342423");
+
+		PageRequest request = new PageRequest(state.getStart() - 1, state.getLengthTable(), state.getSortValue(), state.getVarSort());
+		Specification<Company> specification = CompanySpecifications.filterMultiCollumn(company);
 		
 		List<Company> data = companyDAO.findAll(specification, request).getContent();
 	
-		return data;
+		return new ResponseEntity<List<Company>>(data,HttpStatus.OK);
 	}
 	
 	

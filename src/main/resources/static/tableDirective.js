@@ -2,6 +2,8 @@ angular.module("daTable")
 
 .controller("testeController", function($scope){
 	var myTable = this;
+	myTable.state = {};
+	
 	$scope.state = {}
 
 	this.getDataServer = function(){
@@ -11,6 +13,7 @@ angular.module("daTable")
 		$scope.state.sortValue = myTable.state.sortValue;
 		$scope.someCtrlFn();
 	}
+
 })
 
 .directive("myTable", function() {
@@ -24,9 +27,8 @@ angular.module("daTable")
         	state: '='
         },
         link: function($scope, element, attr, myTable){
-        	myTable.state = {};
         	myTable.data = $scope.data;
-        	myTable.ufa = $scope.someCtrlFn;
+        	myTable.getData = $scope.someCtrlFn;
         	
         }
     };

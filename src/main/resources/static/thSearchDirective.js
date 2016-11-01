@@ -10,7 +10,7 @@ angular.module("daTable").directive("mySearchHeader", function() {
         	attr: '='
         },
         link: function($scope, element, attr, myTable){
-        	$scope.someCtrlFn = myTable.ufa;
+        	$scope.getData = myTable.getData;
         }
     };
 });
