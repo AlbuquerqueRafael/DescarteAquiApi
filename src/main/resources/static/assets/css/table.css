@@ -1,17 +1,34 @@
-tr {
-	width: 100%;
-	display: inline-table;
-	table-layout: fixed;
+tbody {
+    display:block;
+    max-height:413px;
+    overflow-y:auto;
 }
 
-table{
- 	height:500px;              /* <-- Select the height of the table**/
- 	display: -moz-groupbox;    /* Firefox Bad Effect */
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
 }
 
-tbody{
-  overflow-y: scroll;      
-  height: 500px;            /*/  <-- Select the height of the body */
-  width: 100%;
-  position: absolute;
+/*
+thead {
+    width:98.2%; 
+	
 }
+
+table {
+    width:98.2%;
+}*/
+
+thead input{
+				text-align: center !important;
+    vertical-align: middle !important;
+}
+
+
+
+/* Change the color of bootstrap hover */
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #4DAF7C;
+}
+

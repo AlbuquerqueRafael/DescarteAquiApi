@@ -12,6 +12,7 @@ angular.module("daTable").directive("myNumElements", function(companyService) {
         	myTable.state.lengthTable = $scope.lengthTable;
         	
         	$scope.$watch('lengthTable', function(newValue, oldValue) {
+       
         		if (newValue !== oldValue) {
         			myTable.state.lengthTable = $scope.lengthTable;
         			myTable.getDataServer();

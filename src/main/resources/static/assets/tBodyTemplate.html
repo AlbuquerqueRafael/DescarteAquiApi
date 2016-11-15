@@ -1,3 +1,4 @@
 <tr ng-repeat="row in data">
-	<td ng-repeat="(key, value) in row" > {{value}} </td> 
+	<td style="width:40px"> {{$index + 1}} </td>
+	<td ng-repeat="(key, value) in row"> {{value}} </td> 
 </tr>

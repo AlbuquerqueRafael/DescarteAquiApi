@@ -52,7 +52,6 @@ public class Company implements Serializable {
 		this.adress = adress;
 	}
 	
-	@JsonIgnore
 	public String getPhone(){
 		return phone;
 	}

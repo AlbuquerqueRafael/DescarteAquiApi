@@ -23,6 +23,7 @@ angular.module('descarteaqui').factory('companyService', function($http){
     }
     
 	service.getAllCompanies = function(company, state){
+		console.log(state)
 		var data = { company: company, state: state};
 		return $http.post("/test", data, { 
 			headers: {'contentType': 'application/json'

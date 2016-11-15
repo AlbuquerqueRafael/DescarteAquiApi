@@ -4,11 +4,15 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<link rel="stylesheet" href="/assets/libs/boostrap/bootstrap.min.css">
 		<link rel="stylesheet" href="/assets/libs/font-awesome/font-awesome.min.css">
+		<link rel="stylesheet" href="/assets/css/table.css">
+		
+
 		<script src="/assets/libs/angular/angular.min.js"></script>
 		<script src="/assets/libs/smart-table/smart-table.min.js"></script>
 		<script src="/assets/libs/boostrap/ui-bootstrap-tpls-2.2.0.min.js"></script>
 		<script src="daTable.js"></script>
 		<script src="tableDirective.js"></script>
+		<script src="clearSearchDirective.js"></script>
 		<script src="thOrderDirective.js"></script>
 		<script src="numElemPagesDirective.js"></script>
 		<script src="enterSearchDirective.js"></script>
@@ -18,7 +22,7 @@
 		<script src="app.js"></script>
 		<script src="companyService.js"></script>
 		<script src="companyController.js"></script>
-	</head>
+		
 	
 	<body ng-controller="companyController">
 		<div my-table 
@@ -26,16 +30,18 @@
 							state="state"
 							callback-fn="getCompanyData()" 
 							class="container">
-   	
+							
+				<my-clear-search attr="company"></my-clear-search>
    	<my-num-elements></my-num-elements>
-				<table class="table table-bordered">
+				<table class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr my-search-header attr="company" info="info"> </tr>
 							<tr my-order-header info="info"> </tr>
 						</thead>
 		    <tbody my-body data="data"></tbody>
   		</table>
- 			<my-pagination></my-pagination>
+ 			<my-pagination total-itens="totalItens"></my-pagination>
+ 			
 			</div>
 
 			
