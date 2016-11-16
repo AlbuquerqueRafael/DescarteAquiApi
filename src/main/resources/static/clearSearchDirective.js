@@ -12,6 +12,7 @@ angular.module("daTable").directive("myClearSearch", function(companyService) {
         	
         	$scope.clearSearch = function(){
         		deleteProperties($scope.attr);
+        		myTable.state.start = 1;
         		myTable.getDataServer();
         	}
         	

@@ -11,6 +11,11 @@ angular.module("daTable").directive("mySearchHeader", function() {
         },
         link: function($scope, element, attr, myTable){
         	$scope.getData = myTable.getData;
+        	
+        	$scope.getServerData = function(){
+        		myTable.state.start = 1;
+        		myTable.getData();
+        	}
         }
     };
 });

@@ -1,4 +1,4 @@
-package com.descarteaqui.DAO;
+package com.descarteaqui.company;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
-
-import com.descarteaqui.domain.Company;
 
 public class CompanySpecifications {
 	

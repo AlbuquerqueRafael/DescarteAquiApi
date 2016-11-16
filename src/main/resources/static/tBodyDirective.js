@@ -7,8 +7,6 @@ angular.module("daTable").directive("myBody", function() {
         transclude: true,
         scope: {
         	data: '='
-        },
-        link: function($scope, element, attr, myTable){
         }
     };
 });

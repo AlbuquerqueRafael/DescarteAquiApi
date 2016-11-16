@@ -11,6 +11,7 @@ angular.module("daTable")
 		$scope.state.lengthTable = myTable.state.lengthTable;
 		$scope.state.varSort = myTable.state.varSort;
 		$scope.state.sortValue = myTable.state.sortValue;
+		
 		$scope.someCtrlFn();
 	}
 

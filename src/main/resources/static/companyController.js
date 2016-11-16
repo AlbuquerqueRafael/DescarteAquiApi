@@ -10,10 +10,9 @@ angular.module("descarteaqui").controller("companyController", function ($scope,
 		companyService.getAllCompanies(company, state).then(function successCallback(response) {
 			$scope.data = response.data.company;
 			$scope.totalItens = response.data.size;
-	     
 		}, function errorCallback(response) {
 			console.log(response)
-			console.log(response.data.erro)
+			console.log(response.data.error)
 		});
 	}
 	
