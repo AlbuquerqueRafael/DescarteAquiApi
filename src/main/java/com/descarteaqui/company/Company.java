@@ -21,7 +21,6 @@ public class Company implements Serializable {
 	private String name;
 	@Column(name = "adress")
 	private String adress;
-	
 	@Column(name = "phone")
 	private String phone;
 	

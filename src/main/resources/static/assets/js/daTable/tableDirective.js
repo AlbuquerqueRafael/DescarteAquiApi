@@ -3,7 +3,6 @@ angular.module("daTable")
 .controller("testeController", function($scope){
 	var myTable = this;
 	myTable.state = {};
-	
 	$scope.state = {}
 
 	this.getDataServer = function(){
@@ -12,9 +11,10 @@ angular.module("daTable")
 		$scope.state.varSort = myTable.state.varSort;
 		$scope.state.sortValue = myTable.state.sortValue;
 		
+		console.log
 		$scope.someCtrlFn();
 	}
-
+	
 })
 
 .directive("myTable", function() {

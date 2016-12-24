@@ -2,10 +2,13 @@ angular.module("descarteaqui").controller("companyController", function ($scope,
 	$scope.data = {}
 	$scope.company = {}
 	$scope.totalItens = 10;
+	$scope.info = companyService.getInfo();
 	
 	$scope.getCompanyData = function(){
 		var state = $scope.state;
 		var company = $scope.company;
+		
+		console.log($scope.state)
 
 		companyService.getAllCompanies(company, state).then(function successCallback(response) {
 			$scope.data = response.data.company;
@@ -16,6 +19,5 @@ angular.module("descarteaqui").controller("companyController", function ($scope,
 		});
 	}
 	
-	$scope.info = companyService.getInfo();
 	
 });

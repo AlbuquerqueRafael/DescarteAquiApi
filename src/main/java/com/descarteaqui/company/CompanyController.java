@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +42,11 @@ public class CompanyController {
 		model = companyService.getSearch(company, request, tableState);
 		
 		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{[path:[^\\.]*}")
+	public String redirect() {
+	  return "forward:/index";
 	}
 	
 	
