@@ -3,20 +3,23 @@
 angular.module("descarteaqui", ['daTable', 'ngRoute'])
 
 .config(function($locationProvider, $routeProvider) {
-    $locationProvider.html5Mode(true);
-    
-    $routeProvider
+  
+	$routeProvider
     .when('/', {
-      templateUrl: 'company/index.html',
+      templateUrl: '/company/index.html',
       controller: 'companyController'
     })
     
     .when('/company/create', {
-      templateUrl: 'company/companyCreate.html'
+      templateUrl: '/company/companyCreate.html'
     })
     
     .otherwise({
       redirectTo: '/'
     });
-    console.log();
+    
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 });

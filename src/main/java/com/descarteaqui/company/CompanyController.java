@@ -44,10 +44,6 @@ public class CompanyController {
 		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{[path:[^\\.]*}")
-	public String redirect() {
-	  return "forward:/index";
-	}
 	
 	
 	
