@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +44,30 @@ public class CompanyController {
 		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value = "/company/create", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> create(@RequestBody Company company){
+		
+		
+		companyService.saveCompany(company);
+		return null;
+	}
+	
+	@RequestMapping(value = "/company/show/{id}", method = RequestMethod.PUT)
+	public Company show(@PathVariable("id") Long id) {
+		
+		return companyService.getCompanyById(id);
+	}
+	
+	@RequestMapping(value = "/company/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id) {
+		String result = companyService.deleteCompanyById(id);
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("result", result);
+		
+		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
+	}
 	
 	
 	

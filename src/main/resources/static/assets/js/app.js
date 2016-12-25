@@ -11,7 +11,13 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     })
     
     .when('/company/create', {
-      templateUrl: '/company/companyCreate.html'
+      templateUrl: '/company/companyCreate.html',
+      controller: 'companyController'
+    })
+    
+     .when('/company/show/:id', {
+      templateUrl: '/company/show.html',
+      controller: 'companyController'
     })
     
     .otherwise({

@@ -1,17 +1,13 @@
-angular.module("daTable")
-
-.controller("testeController", function($scope){
+angular.module("daTable").controller("testeController", function($scope){
 	var myTable = this;
 	myTable.state = {};
-	$scope.state = {}
-
+	
 	this.getDataServer = function(){
 		$scope.state.start = myTable.state.start;
 		$scope.state.lengthTable = myTable.state.lengthTable;
 		$scope.state.varSort = myTable.state.varSort;
 		$scope.state.sortValue = myTable.state.sortValue;
-		
-		console.log
+
 		$scope.someCtrlFn();
 	}
 	
@@ -30,7 +26,7 @@ angular.module("daTable")
         link: function($scope, element, attr, myTable){
         	myTable.data = $scope.data;
         	myTable.getData = $scope.someCtrlFn;
-        	
+
         }
     };
 });

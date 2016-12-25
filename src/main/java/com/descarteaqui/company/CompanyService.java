@@ -15,7 +15,10 @@ import org.springframework.stereotype.Service;
 
 import com.descarteaqui.company.exceptions.CompanyJsonNotFoundException;
 import com.descarteaqui.company.exceptions.InvalidCompanyAttributeException;
+import com.descarteaqui.general.IdNotFoundException;
+import com.descarteaqui.general.InvalidDataException;
 import com.descarteaqui.state.State;
+
 import com.descarteaqui.state.exceptions.InvalidSortableVarPropertyException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,5 +75,45 @@ public class CompanyService {
 		return model;
 	
 	}
+	
+	public void saveCompany(Company company){
+		
+		if(company.getName() == null || company.getName().equals("")){
+			throw new InvalidDataException("Name of company can't be null or empty");
+		}else if( company.getAdress() == null || company.getAdress().equals("")){
+			throw new InvalidDataException("Adress of company can't be null or empty");
+		}else if(company.getAdress() == null || company.getPhone().equals("")){
+			throw new InvalidDataException("Phone of company can't be null or empty");
+		}
+		
+		companyDAO.save(company);
+		
+	}
+	
+	public Company getCompanyById(Long id){
+		Company company = companyDAO.findById(id);
+		
+		if(company == null){
+			throw new IdNotFoundException("Id was not found");
+		}
+		return company;
+	}
+	
+	public String deleteCompanyById(Long id){
+		Company company = companyDAO.findById(id);
+		String name = "";
+		String adress = "";
+		
+		if(company == null){
+			throw new IdNotFoundException("Id was not found");
+		}else{
+			name = company.getName();
+			adress = company.getAdress();
+			companyDAO.delete(id);
+		}
+		
+		return "Company with name " + name + " and adress " + adress + " was successfully deleted";
+	}
+	
 	
 }

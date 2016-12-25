@@ -1,0 +1,19 @@
+.almostJumbotron{
+  background-color: blue;
+  background: #DCDCDC;
+  width: 800px;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  position: relative;
+  padding-top: 50px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.form-group{
+		margin-right: 20px;
+		margin-left: 20px;
+		margin-button: 200px;
+}

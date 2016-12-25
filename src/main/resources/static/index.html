@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="/assets/libs/boostrap/bootstrap.min.css">
 		<link rel="stylesheet" href="/assets/libs/font-awesome/font-awesome.min.css">
 		<link rel="stylesheet" href="/assets/css/table.css">
+		<link rel="stylesheet" href="/assets/css/page.css">
 		<script src="/assets/libs/angular/angular.min.js"></script>
 		<script src="/assets/libs/angular/angular-route.min.js"></script>
 		<script src="/assets/libs/boostrap/ui-bootstrap-tpls-2.2.0.min.js"></script>
@@ -30,9 +31,15 @@
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav navbar-right ">
            <li>
-           	<a ng-href="/company/create">
-           		<span ng-class="'glyphicon glyphicon-' + menu.class"></span> 
+           	<a data-ng-href="/company/create">
+           		<span data-ng-class="'glyphicon glyphicon-' + menu.class"></span> 
            		<span class="icon-bar">Create</span>
+           	</a>
+           </li>
+           <li>
+           	<a data-ng-href="/company/show">
+           		<span data-ng-class="'glyphicon glyphicon-' + menu.class"></span> 
+           		<span class="icon-bar">Show</span>
            	</a>
            </li>
          </ul>
@@ -40,7 +47,7 @@
      </div>
    </nav>
    
-   <div class="container">
+   <div>
    		<div ng-view></div>
    </div>
 	</body>

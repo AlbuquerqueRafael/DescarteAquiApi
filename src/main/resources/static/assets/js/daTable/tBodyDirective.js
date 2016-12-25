@@ -1,4 +1,4 @@
-angular.module("daTable").directive("myBody", function() {
+angular.module("daTable").directive("myBody", function($location) {
 	return {
         templateUrl: 'assets/tBodyTemplate.html',
         restrict: "A",
@@ -6,7 +6,15 @@ angular.module("daTable").directive("myBody", function() {
         require: '^myTable',
         transclude: true,
         scope: {
-        	data: '='
+        	data: '=',
+        	showUrl: '@showUrl'
+        },
+        link: function($scope, element, attr, myTable){
+        	
+        	$scope.route = function(row){
+        		$location.path("/company/show/" + row.id)
+        	}
+        	
         }
     };
 });

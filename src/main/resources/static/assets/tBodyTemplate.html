@@ -1,4 +1,4 @@
-<tr ng-repeat="row in data">
+<tr ng-click="route(row)" ng-repeat="row in data">
 	<td style="width:40px"> {{$index + 1}} </td>
-	<td ng-repeat="(key, value) in row"> {{value}} </td> 
+	<td ng-repeat="(key, value) in row" ng-if="$index > 0"> {{value}} </td> 
 </tr>

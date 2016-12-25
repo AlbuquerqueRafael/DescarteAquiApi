@@ -14,6 +14,7 @@ import javax.persistence.Table;
 public class Company implements Serializable {
 	
 	private static final long serialVersionUID = -1785131699037567362L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -55,6 +56,10 @@ public class Company implements Serializable {
 	
 	public void setPhone(String phone){
 		this.phone = phone;
+	}
+	
+	public Long getId(){
+		return id;
 	}
 
 	

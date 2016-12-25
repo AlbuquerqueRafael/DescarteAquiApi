@@ -27,5 +27,17 @@ angular.module('descarteaqui').factory('companyService', function($http){
 		return $http.post("/company", data);
 	}
 	
+	service.create = function(company){
+		return $http.post("/company/create", company);
+	}
+	
+	service.getCompanyById = function(id){
+		return $http.put("/company/show/" + id);
+	}
+	
+	service.deleteById = function(id){
+		return $http.delete("/company/delete/" + id);
+	}
+	
 	return service;
 });
