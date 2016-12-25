@@ -2,18 +2,18 @@
 	<form class="almostJumbotron">
   <div class="form-group">
     <label for="email">Company Name:</label>
-    <input type="text" class="form-control" id="name" data-ng-model="company.name">
+    <input type="text" class="form-control" id="name" data-ng-model="company.name" ng-disabled="true">
   </div>
   <div class="form-group">
     <label for="adress">Adress:</label>
-    <input type="text" class="form-control" id="adress" data-ng-model="company.adress">
+    <input type="text" class="form-control" id="adress" data-ng-model="company.adress" ng-disabled="true">
   </div>
   <div class="form-group">
     <label for="phone">Phone:</label>
-    <input type="text" class="form-control" id="phone" data-ng-model="company.phone">
+    <input type="text" class="form-control" id="phone" data-ng-model="company.phone" ng-disabled="true">
   </div>
   <div class=text-right>
-     <button data-ng-click="create()" class="btn-primary btn">Edit</button>
+     <button data-ng-click="edit()" class="btn-primary btn">Edit</button>
      <button data-ng-click="del()" class="btn-danger btn">Delete</button>
      <button onclick="history.go(-1);" class="btn-warning btn">Cancel</button>
 		</div>
