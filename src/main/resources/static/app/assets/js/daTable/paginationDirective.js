@@ -1,6 +1,6 @@
 angular.module("daTable").directive("myPagination", function(companyService) {
 	return {
-        templateUrl: 'assets/paginationTemplate.html',
+        templateUrl: '/app/assets/paginationTemplate.html',
         restrict: "EA",
         replace: false,
     	require: '^myTable',

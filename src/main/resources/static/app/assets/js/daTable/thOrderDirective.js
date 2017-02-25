@@ -1,6 +1,6 @@
 angular.module("daTable").directive("myOrderHeader", function() {
 	return {
-        templateUrl: 'assets/thOrderTemplate.html',
+        templateUrl: '/app/assets/thOrderTemplate.html',
         restrict: "A",
         replace: false,
         require: "^myTable",

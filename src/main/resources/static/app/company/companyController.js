@@ -1,5 +1,7 @@
-angular.module("descarteaqui").controller("companyController", function ($scope, companyService, $routeParams, 
-		$location) {
+'use strict';
+
+angular.module("descarteaqui").controller("companyController", 
+		function ($scope, companyService, $routeParams, $location) {
 	$scope.data = {}
 	$scope.company = {}
 	$scope.totalItens = 10;
@@ -23,9 +25,8 @@ angular.module("descarteaqui").controller("companyController", function ($scope,
 		var company = $scope.company;
 		companyService.create(company).then(function successCallback(response) {
 			$location.path("/");
-		}, function errorCallback(response) {
-			console.log(response)
-			console.log(response.data.error)
+		}, function errorCallback(response, error) {
+			
 		});
 	}
 	

@@ -1,6 +1,6 @@
 angular.module("daTable").directive("myNumElements", function(companyService) {
 	return {
-        templateUrl: 'assets/numPagesTemplate.html',
+        templateUrl: '/app/assets/numPagesTemplate.html',
         restrict: "E",
         replace: false,
         require: '^myTable',

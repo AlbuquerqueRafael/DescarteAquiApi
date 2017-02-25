@@ -1,6 +1,6 @@
 angular.module("daTable").directive("myClearSearch", function(companyService) {
 	return {
-        templateUrl: 'assets/clearSearchTemplate.html',
+        templateUrl: '/app/assets/clearSearchTemplate.html',
         restrict: "EA",
         replace: false,
         require: '^myTable',

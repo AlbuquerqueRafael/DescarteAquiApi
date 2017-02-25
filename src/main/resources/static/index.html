@@ -2,44 +2,52 @@
 	<head>
 		<title> DescarteAqui </title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<link rel="stylesheet" href="/assets/libs/boostrap/bootstrap.min.css">
-		<link rel="stylesheet" href="/assets/libs/font-awesome/font-awesome.min.css">
-		<link rel="stylesheet" href="/assets/css/table.css">
-		<link rel="stylesheet" href="/assets/css/page.css">
-		<script src="/assets/libs/angular/angular.min.js"></script>
-		<script src="/assets/libs/angular/angular-route.min.js"></script>
-		<script src="/assets/libs/boostrap/ui-bootstrap-tpls-2.2.0.min.js"></script>
-		<script src="/assets/js/daTable/daTable.js"></script>
-		<script src="/assets/js/daTable/tableDirective.js"></script>
-		<script src="/assets/js/daTable/clearSearchDirective.js"></script>
-		<script src="/assets/js/daTable/thOrderDirective.js"></script>
-		<script src="/assets/js/daTable/numElemPagesDirective.js"></script>
-		<script src="/assets/js/daTable/enterSearchDirective.js"></script>
-		<script src="/assets/js/daTable/paginationDirective.js"></script>
-		<script src="/assets/js/daTable/tBodyDirective.js"></script>
-		<script src="/assets/js/daTable/thSearchDirective.js"></script>
-		<script src="/assets/js/app.js"></script>
-		<script src="/company/companyService.js"></script>
-		<script src="/company/companyController.js"></script>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" href="/app/assets/libs/boostrap/bootstrap.min.css">
+		<link rel="stylesheet" href="/app/assets/libs/font-awesome/font-awesome.min.css">
+		<link rel="stylesheet" href="/app/assets/css/table.css">
+		<link rel="stylesheet" href="/app/assets/css/page.css">
+		<link rel="stylesheet" href="/app/assets/css/user/login.css">
+		
+		<script src="/app/assets/libs/angular/angular.min.js"></script>
+		<script src="/app/assets/libs/angular/angular-route.min.js"></script>
+		<script src="/app/assets/libs/boostrap/ui-bootstrap-tpls-2.2.0.min.js"></script>
+		<script src="/app/assets/js/daTable/daTable.js"></script>
+		<script src="/app/assets/js/daTable/tableDirective.js"></script>
+		<script src="/app/assets/js/daTable/clearSearchDirective.js"></script>
+		<script src="/app/assets/js/daTable/thOrderDirective.js"></script>
+		<script src="/app/assets/js/daTable/numElemPagesDirective.js"></script>
+		<script src="/app/assets/js/daTable/enterSearchDirective.js"></script>
+		<script src="/app/assets/js/daTable/paginationDirective.js"></script>
+		<script src="/app/assets/js/daTable/tBodyDirective.js"></script>
+		<script src="/app/assets/js/daTable/thSearchDirective.js"></script>
+		<script src="/app/assets/js/app.js"></script>
+		
+		<!-- Company -->
+		<script src="/app/company/companyService.js"></script>
+		<script src="/app/company/companyController.js"></script>
+		
+		<!-- User -->
+		<script src="/app/user/userController.js"></script>
+		<script src="/app/user/userService.js"></script>
+		
+		<!-- Menu -->
+		<script src="/app/menu/menuController.js"></script>
+		<script src="/app/menu/menuService.js"></script>
 		
 	<body data-ng-app="descarteaqui">
 		  <nav class="navbar navbar-default navbar-fixed-top navbar navbar-inverse">
-     <div class="container">
+     <div class="container" data-ng-controller="menuController">
        <div class="navbar-header page-scroll">
          <a href="/" class="navbar-brand page-scroll">DescarteAquiApi!</a>
        </div>
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav navbar-right ">
-           <li>
-           	<a data-ng-href="/company/create">
-           		<span data-ng-class="'glyphicon glyphicon-' + menu.class"></span> 
-           		<span class="icon-bar">Create</span>
-           	</a>
-           </li>
-           <li>
-           	<a data-ng-href="/company/show">
-           		<span data-ng-class="'glyphicon glyphicon-' + menu.class"></span> 
-           		<span class="icon-bar">Show</span>
+           <li data-ng-repeat="option in menu">
+           		<a data-ng-href={{option.href}}>
+           		<span> <i data-ng-class="'fa fa-' + option.class" aria-hidden="true"></i></span> 
+           		<span>{{option.nome}}</span>
            	</a>
            </li>
          </ul>
@@ -48,7 +56,7 @@
    </nav>
    
    <div>
-   		<div ng-view></div>
+   		<div data-ng-view></div>
    </div>
 	</body>
 
