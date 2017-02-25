@@ -78,7 +78,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> login(@RequestParam String username, 
-													 @RequestParam String password) throws IOException {
+							 @RequestParam String password) throws IOException {
 		
 		System.out.println(username.toString());
 		String token = null;
