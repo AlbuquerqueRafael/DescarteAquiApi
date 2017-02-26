@@ -17,8 +17,8 @@ angular.module('descarteaqui').controller('userController',
 					$http.defaults.headers.common['Authorization'] = 'Bearer ' + res.token;
 					
 					// setting the user in AuthService
-					$window.sessionStorage.setItem('user', res.user);
-					console.log($window.sessionStorage.getItem('user'))
+					$window.sessionStorage.setItem('user', JSON.stringify(res));
+				
 					$rootScope.$broadcast('LoginSuccessful');
 					$location.path('/company');
 					// going to the home page

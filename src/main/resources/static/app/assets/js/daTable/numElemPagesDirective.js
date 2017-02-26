@@ -5,13 +5,14 @@ angular.module("daTable").directive("myNumElements", function(companyService) {
         replace: false,
         require: '^myTable',
         transclude: true,
-        scope: {},
+        scope: {
+        	totalItens: '='
+        },
         link: function($scope, element, attr, myTable){
+        	        	
+        	myTable.state.lengthTable = $scope.totalItens;
         	
-        	$scope.lengthTable = 10;
-        	myTable.state.lengthTable = $scope.lengthTable;
-        	
-        	$scope.$watch('lengthTable', function(newValue, oldValue) {
+        	$scope.$watch('totalItens', function(newValue, oldValue) {
        
         		if (newValue !== oldValue) {
         			myTable.state.lengthTable = $scope.lengthTable;

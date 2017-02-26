@@ -35,12 +35,10 @@ public class JWTFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
 			throws IOException, ServletException {
-
 		HttpServletRequest request = (HttpServletRequest) req;
 		String authHeader = request.getHeader(AUTHORIZATION_HEADER);
-		System.out.println("dddd");
+		System.out.println("uuuu");
 		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			System.out.println("u");
 			((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Authorization header.");
 		} else {
 			try {
@@ -50,6 +48,7 @@ public class JWTFilter extends GenericFilterBean {
 				SecurityContextHolder.getContext().setAuthentication(getAuthentication(claims));
 				filterChain.doFilter(req, res);
 			} catch (SignatureException e) {
+				System.out.println("ssss");
 				((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
 			}
 
@@ -64,10 +63,10 @@ public class JWTFilter extends GenericFilterBean {
 	 * @return
 	 */
 	public Authentication getAuthentication(Claims claims) {
-		System.out.println("gggss");
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		@SuppressWarnings("unchecked")
 		List<String> roles = (List<String>) claims.get(AUTHORITIES_KEY);
+		
 		for (String role : roles) {
 			authorities.add(new SimpleGrantedAuthority(role));
 		}
@@ -77,4 +76,5 @@ public class JWTFilter extends GenericFilterBean {
 				principal, "", authorities);
 		return usernamePasswordAuthenticationToken;
 	}
+	
 }

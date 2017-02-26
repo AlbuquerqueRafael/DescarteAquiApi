@@ -41,6 +41,7 @@ public class UserController {
 		if (appUserRepository.findByUsername(appUser.getUsername()) != null) {
 			throw new RuntimeException("Username already exist");
 		}
+		
 		List<String> roles = new ArrayList<>();
 		roles.add("USER");
 		appUser.setRoles(roles);
@@ -80,7 +81,6 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> login(@RequestParam String username, 
 													 @RequestParam String password) throws IOException {
 		
-		System.out.println(username.toString());
 		String token = null;
 		AppUser appUser = appUserRepository.findByUsername(username);
 		Map<String, Object> tokenMap = new HashMap<String, Object>();

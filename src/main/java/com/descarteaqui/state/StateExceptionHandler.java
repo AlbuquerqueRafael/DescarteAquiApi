@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.descarteaqui.state.exceptions.InvalidSortableVarPropertyException;
 import com.descarteaqui.state.exceptions.InvalidStateAttributeException;
 import com.descarteaqui.state.exceptions.InvalidStateAttributeValuesException;
-import com.descarteaqui.state.exceptions.NoPermissionException;
 import com.descarteaqui.state.exceptions.StateJsonNotFoundException;
 
 @ControllerAdvice
@@ -39,10 +38,6 @@ public class StateExceptionHandler {
 		return mountBadRequestException(e.getMessage(), e.getClass().getSimpleName());
 	}
 	
-	@ExceptionHandler(NoPermissionException.class)
-	public ResponseEntity<Map<String, Object>> handleNoPermissionException(NoPermissionException e) {
-		return mountBadRequestException(e.getMessage(), e.getClass().getSimpleName());
-	}
 	
 	private ResponseEntity<Map<String, Object>> mountBadRequestException(String errorMessage, String exceptionName){
 		model.put("error", errorMessage);

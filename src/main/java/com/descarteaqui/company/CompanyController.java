@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.descarteaqui.annotation.Roles;
 import com.descarteaqui.state.State;
 import com.descarteaqui.state.StateService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,22 +45,18 @@ public class CompanyController {
 		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
 	}
 	
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/company/create", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> create(@RequestBody Company company){
-		System.out.println("ddd");
 		companyService.saveCompany(company);
 		return null;
 	}
 	
+	@Roles(roles={"ADMIN"})
 	@RequestMapping(value = "/company/show/{id}", method = RequestMethod.PUT)
 	public Company show(@PathVariable("id") Long id) {
-		
 		return companyService.getCompanyById(id);
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/company/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id) {
 		String result = companyService.deleteCompanyById(id);

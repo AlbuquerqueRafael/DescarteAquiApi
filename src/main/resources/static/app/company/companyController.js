@@ -11,7 +11,7 @@ angular.module("descarteaqui").controller("companyController",
 	$scope.getCompanyData = function(){
 		var state = $scope.state;
 		var company = $scope.company;
-		
+
 		companyService.getAllCompanies(company, state).then(function successCallback(response) {
 			$scope.data = response.data.company;
 			$scope.totalItens = response.data.size;
@@ -23,6 +23,7 @@ angular.module("descarteaqui").controller("companyController",
 	
 	$scope.create = function(){
 		var company = $scope.company;
+		
 		companyService.create(company).then(function successCallback(response) {
 			$location.path("/");
 		}, function errorCallback(response, error) {
@@ -31,6 +32,7 @@ angular.module("descarteaqui").controller("companyController",
 	}
 	
 	if($routeParams.id !== undefined){
+		console.log($routeParams)
 		companyService.getCompanyById($routeParams.id).then(function successCallback(response) {
 			$scope.company = response.data;
 		}, function errorCallback(response) {

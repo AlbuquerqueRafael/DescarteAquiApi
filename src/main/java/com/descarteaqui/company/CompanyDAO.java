@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public interface CompanyDAO extends JpaRepository<Company, Long>{
-	
+
 	public Company findById(Long id);
 	public Page<Company> findAll(Specification<?> spec, Pageable page);
 	

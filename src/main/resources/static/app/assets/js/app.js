@@ -7,32 +7,30 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
 	$routeProvider
     .when('/', {
     	templateUrl: '/app/user/login.html',
-    	controller: 'userController',
-    	requireLogin : false
+    	controller: 'userController'
     })
     
      .when('/company', {
     	templateUrl: '/app/company/index.html',
     	controller: 'companyController',
-    	requireLogin : true
+    	roles: ['USER']
     })
     
     .when('/company/create', {
     	templateUrl: '/app/company/companyCreate.html',
     	controller: 'companyController',
-    	requireLogin : true
+    	roles: ['ADMIN']
     })
     
     .when('/user/login/', {
     	templateUrl: '/app/user/login.html',
-    	controller: 'userController',
-    	requireLogin : false
+    	controller: 'userController'
     }) 
     
     .when('/company/show/:id', {
       templateUrl: '/app/company/show.html',
       controller: 'companyController',
-      requireLogin : true
+      roles: ['ADMIN']
     })
     
     .otherwise({
@@ -47,8 +45,9 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
 
 .run(function($rootScope, $location, $http, userService){
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-	var user = userService.getLoggedUser();
+	var user = JSON.parse(userService.getLoggedUser());
 	
+	//Changes the main page depending if the user is logged or not and deals with logout
 	if ($location.path() === "/sair") {	
 		userService.logout();
 		$location.path("/");
@@ -56,15 +55,29 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     	$location.path("/company");
     }
 	
-    //Algoritmo para não deixar algum usario entrar sem estar logado
-    if (next.$$route === undefined || 
-    	(next.$$route.requireLogin && user === null))  {
-       $location.path("/");
+	//Checks if the user has the permission to acess a route
+	if(next.$$route.roles != undefined){
+		var userRoles = user.user.roles;
+		var routRoles = next.$$route.roles;
+		var hasPermission = false;
+		
+		for(var index in userRoles){
+			if(routRoles.indexOf(userRoles[index]) != -1){
+				hasPermission = true;
+				break;
+			}
+		}
+		
+		if(!hasPermission){
+			event.preventDefault();
+		}
+	
+	}
+
+    if(user !== null){
+    	$http.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
     }
-   
-
-
-    //$http.interceptors.push('ApiInterceptorService');
+ 
 
   });
 });

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('descarteaqui').factory('companyService', function($http){
     var service = {};
     
