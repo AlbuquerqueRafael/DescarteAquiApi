@@ -15,7 +15,8 @@ angular.module("descarteaqui").factory("menuService", function($location, userSe
 
   service.getUserMenu = function(){
     var menus = [
-      {path : "/company", href : "/company", nome: "Company", class:"time"},
+      {path : "/user", href : "/user", nome: "User", class:"user"},
+      {path : "/company", href : "/company", nome: "Company", class:"building-o"},
       {path : "/sair", href: "/sair", nome: "Sair", class: "leaf"}
     ];
 

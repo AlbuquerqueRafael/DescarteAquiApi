@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.descarteaqui.annotation.Roles;
+import com.descarteaqui.annotation.Permission;
 import com.descarteaqui.user.AppUser;
 import com.descarteaqui.user.UserDAO;
 
@@ -42,7 +42,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		//Checks if the user has the permission role attached to the method
 		try{
 			Method method = handlerMethod.getMethod();
-			Roles roles = method.getAnnotation(Roles.class);
+			Permission roles = method.getAnnotation(Permission.class);
 		
 		    for (String role : roles.roles()){
 		    	if(user.getRoles().contains(role)){
@@ -50,8 +50,8 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		    	}
 		    }
 		
-		}catch(NoRoleAttachedException e){
-			//If the method does not have role, this means that he can be acess by anyone
+		}catch(NullPointerException e){
+			//If the method does not have role, this means that it can be acess by anyone
 			return true;
 		}
 	

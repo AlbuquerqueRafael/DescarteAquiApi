@@ -1,15 +1,15 @@
 <div my-table 
 					data="data" 
 					state="state"
-					callback-fn="getCompanyData()" 
+					callback-fn="getUserData()" 
 					class="container table-content">
 		
-		<a href="/company/create" class="btn btn-primary">Create</a>
-		<my-clear-search attr="company"></my-clear-search>
- 	<my-num-elements></my-num-elements>
+		<a href="/user/create" class="btn btn-primary">Create</a>
+		<my-clear-search attr="user"></my-clear-search>
+ 	<my-num-elements total-itens="totalItens"></my-num-elements>
 		<table class="table table-hover table-bordered table-striped">
 				<thead>
-					<tr my-search-header attr="company" info="info"> </tr>
+					<tr my-search-header attr="user" info="info"> </tr>
 					<tr my-order-header info="info"> </tr>
 				</thead>
     <tbody my-body data="data" show-url='/company/create'></tbody>

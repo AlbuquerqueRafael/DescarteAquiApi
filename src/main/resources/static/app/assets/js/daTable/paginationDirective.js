@@ -33,9 +33,8 @@ angular.module("daTable").directive("myPagination", function(companyService) {
         		if (newValue !== oldValue) {
         			$scope.currentPage = myTable.state.start;
     			}
-        	});
-        	
-           	myTable.getDataServer();
+        	});     	
+
         }
     };
 });

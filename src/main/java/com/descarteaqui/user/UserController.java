@@ -10,6 +10,7 @@ import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.descarteaqui.state.State;
+import com.descarteaqui.state.StateService;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -29,6 +33,28 @@ public class UserController {
 	@Autowired
 	private UserDAO appUserRepository;
 
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private StateService tableStateService;
+	
+	@RequestMapping(value = "/user/info", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> getUsers(@RequestBody String searchData) 
+			throws IOException{
+		Map<String, Object> model = new HashMap<String, Object>();
+
+		JsonNode node = userService.initNode(model, searchData);
+		AppUser user = userService.initCompany( node);
+		State tableState = tableStateService.initTableState( node);
+		PageRequest request = tableStateService.getPageRequest(tableState);
+		
+		model = userService.getSearch(user, request, tableState);
+		
+		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
+	}
+	
 	/**
 	 * This method is used for user registration. Note: user registration is not
 	 * require any authentication.

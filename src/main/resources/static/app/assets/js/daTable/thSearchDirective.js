@@ -16,6 +16,7 @@ angular.module("daTable").directive("mySearchHeader", function() {
         		myTable.state.start = 1;
         		myTable.getData();
         	}
+
         }
     };
 });

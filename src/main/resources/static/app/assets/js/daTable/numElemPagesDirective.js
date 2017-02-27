@@ -5,22 +5,20 @@ angular.module("daTable").directive("myNumElements", function(companyService) {
         replace: false,
         require: '^myTable',
         transclude: true,
-        scope: {
-        	totalItens: '='
-        },
+        scope: {},
         link: function($scope, element, attr, myTable){
-        	        	
-        	myTable.state.lengthTable = $scope.totalItens;
         	
-        	$scope.$watch('totalItens', function(newValue, oldValue) {
+        	$scope.numElements = 10;
+        	myTable.state.lengthTable = $scope.numElements;
+        	
+        	$scope.$watch('numElements', function(newValue, oldValue) {
        
         		if (newValue !== oldValue) {
-        			myTable.state.lengthTable = $scope.lengthTable;
+        			myTable.state.lengthTable = $scope.numElements;
         			myTable.getDataServer();
     			}
         	});
-        	
-        	
+        		
         }
     };
 });

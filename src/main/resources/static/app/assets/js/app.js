@@ -13,13 +13,25 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
      .when('/company', {
     	templateUrl: '/app/company/index.html',
     	controller: 'companyController',
-    	roles: ['USER']
+    	roles: ["USER"]
     })
     
     .when('/company/create', {
-    	templateUrl: '/app/company/companyCreate.html',
+    	templateUrl: '/app/company/create.html',
     	controller: 'companyController',
-    	roles: ['ADMIN']
+    	roles: ["USER"]
+    })
+    
+    .when('/company/:id/show', {
+    	templateUrl: '/app/company/show.html',
+    	controller: 'companyController',
+    	roles: ["USER"]
+  	})
+   
+  	.when('/company/:id/edit', {
+    	templateUrl: '/app/company/edit.html',
+    	controller: 'companyController',
+    	roles: ["USER"]
     })
     
     .when('/user/login/', {
@@ -27,10 +39,10 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     	controller: 'userController'
     }) 
     
-    .when('/company/show/:id', {
-      templateUrl: '/app/company/show.html',
-      controller: 'companyController',
-      roles: ['ADMIN']
+    .when('/user', {
+    	templateUrl: '/app/user/index.html',
+    	controller: 'userController',
+    	roles: ["USER"]
     })
     
     .otherwise({
@@ -55,8 +67,13 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     	$location.path("/company");
     }
 	
+	if(user !== null){
+		console.log(user.token)
+    	$http.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
+    }
+	
 	//Checks if the user has the permission to acess a route
-	if(next.$$route.roles != undefined){
+	if(next.$$route != undefined && next.$$route.roles != undefined){
 		var userRoles = user.user.roles;
 		var routRoles = next.$$route.roles;
 		var hasPermission = false;
@@ -73,10 +90,6 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
 		}
 	
 	}
-
-    if(user !== null){
-    	$http.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
-    }
  
 
   });
