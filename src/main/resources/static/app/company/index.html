@@ -1,18 +1,18 @@
 <div my-table 
-					data="data" 
-					state="state"
-					callback-fn="getCompanyData()" 
-					class="container table-content">
+	 data="data" 
+	 state="state"
+ 	 callback-fn="getCompanyData()" 
+	 class="container table-content">
 		
-		<a href="/company/create" class="btn btn-primary">Create</a>
-		<my-clear-search attr="company"></my-clear-search>
- 	<my-num-elements></my-num-elements>
-		<table class="table table-hover table-bordered table-striped">
-				<thead>
-					<tr my-search-header attr="company" info="info"> </tr>
-					<tr my-order-header info="info"> </tr>
-				</thead>
-    <tbody my-body data="data" show-url='/company/create'></tbody>
-		</table>
-		<my-pagination total-itens="totalItens"></my-pagination>
+	 <a href="/company/create" class="btn btn-primary">Create</a>
+	 <my-clear-search attr="company"></my-clear-search>
+ 	 <my-num-elements></my-num-elements>
+	 <table class="table table-hover table-bordered table-striped">
+	 	<thead>
+	 		<tr my-search-header attr="company" info="info"> </tr>
+	 		<tr my-order-header info="info"> </tr>
+	 	</thead>
+    	<tbody my-body data="data" show-url='/company/create'></tbody>
+	 </table>
+	 <my-pagination total-itens="totalItens"></my-pagination>
 </div>			

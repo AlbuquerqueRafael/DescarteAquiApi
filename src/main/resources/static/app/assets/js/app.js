@@ -45,6 +45,12 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     	roles: ["USER"]
     })
     
+    .when('/user/create', {
+    	templateUrl: '/app/user/create.html',
+    	controller: 'userController',
+    	roles: ["USER"]
+    })
+    
     .otherwise({
       redirectTo: '/'
     });
@@ -72,16 +78,20 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     	$http.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
     }
 	
-	//Checks if the user has the permission to acess a route
+	//Checks if the user has the permission to acess the route
 	if(next.$$route != undefined && next.$$route.roles != undefined){
 		var userRoles = user.user.roles;
 		var routRoles = next.$$route.roles;
 		var hasPermission = false;
 		
-		for(var index in userRoles){
-			if(routRoles.indexOf(userRoles[index]) != -1){
-				hasPermission = true;
-				break;
+		if(userRoles.indexOf("ADMIN") != -1){
+			hasPermission = true;
+		}else{
+			for(var index in userRoles){
+				if(routRoles.indexOf(userRoles[index]) != -1){
+					hasPermission = true;
+					break;
+				}
 			}
 		}
 		

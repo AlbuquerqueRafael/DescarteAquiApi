@@ -5,7 +5,7 @@ angular.module("descarteaqui").directive("userForm", function(companyService) {
         replace: false,
         transclude: true,
         scope: {
-        	company: '=',
+        	user: '=',
         	disable: '@'
         },
         link: function($scope, element, attr){}

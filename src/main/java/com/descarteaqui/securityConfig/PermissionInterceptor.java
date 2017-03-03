@@ -30,14 +30,18 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 	    HandlerMethod handlerMethod = (HandlerMethod) handler;
 	    
 	    if(handlerMethod.getMethod().getName().equals("error") ||
-	    	handlerMethod.getMethod().getName().equals("login")	||
-	    	handlerMethod.getMethod().getName().equals("register")){
+	       handlerMethod.getMethod().getName().equals("login")	||
+	       handlerMethod.getMethod().getName().equals("register")){
 	    	return true;
 	    }
 	    
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String loggedUsername = auth.getName();
 		AppUser user = appUserRepository.findByUsername(loggedUsername);
+		
+		if(user.getIsAdmin()){
+			return true;
+		}
 		
 		//Checks if the user has the permission role attached to the method
 		try{

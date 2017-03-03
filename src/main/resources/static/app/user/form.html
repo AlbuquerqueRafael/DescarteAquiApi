@@ -1,0 +1,25 @@
+<div class="form-group">
+ <label for="email">Username:</label>
+ <input type="text" class="form-control" id="name" data-ng-model="user.name" ng-disabled={{disable}}>
+</div>
+<div class="form-group">
+  <label for="adr">User email:</label>
+  <input type="text" class="form-control" id="email" data-ng-model="user.email" ng-disabled={{disable}}>
+</div>
+<div class="form-group">
+  <label class="btn btn-success active">
+   <input type="checkbox" autocomplete="off" checked>
+   <span class="glyphicon glyphicon-ok"></span>
+  </label>
+  <label for="adr">isAdmin:</label>
+   <label class="btn btn-success active">
+   <input type="checkbox" autocomplete="off" checked>
+   <span class="glyphicon glyphicon-ok"></span>
+  </label>
+</div>
+<div class="form-group">
+  <label for="pwd">User roles:</label>
+  <input type="text" class="form-control" id="pwd" data-ng-model="user.roles" ng-disabled={{disable}}>
+</div>
+
+  <input type="checkbox" id="isAdmin" data-ng-model="isAdmin" ng-disabled={{disable}}>

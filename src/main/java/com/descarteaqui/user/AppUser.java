@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 /**
  * Model class for application user
  * 
- * @author Sarath Muraleedharan
+ * @author Sarath Muraleedharan edited by Rafael
  *
  */
 @Entity
@@ -43,7 +43,11 @@ public class AppUser implements UserDetails {
 	private String password;
 	@ElementCollection
 	private List<String> roles = new ArrayList<>();
-
+	
+	@JsonIgnore
+	@Column(name = "admin")
+	private boolean isAdmin;
+	
 	public Long getId() {
 		return id;
 	}
@@ -75,6 +79,15 @@ public class AppUser implements UserDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public boolean getIsAdmin(){
+		return isAdmin;
+	}
+	
+	public void setIsAdmin(boolean isAdmin){
+		this.isAdmin = isAdmin;
+	}
+	
 
 	@JsonIgnore
 	@Override
