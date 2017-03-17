@@ -28,7 +28,7 @@ angular.module("descarteaqui").controller("companyController",
 		companyService.create(company).then(function successCallback(response) {
 			$location.path("/");
 		}, function errorCallback(response, error) {
-			
+			$scope.messages = JSON.parse(response.data.error)
 		});
 	}
 	

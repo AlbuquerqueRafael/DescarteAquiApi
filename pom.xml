@@ -24,7 +24,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-<dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -35,34 +35,37 @@
 			<scope>provided</scope>
 		</dependency>
 		
-				<dependency>
-	    <groupId>org.springframework.boot</groupId>
-     <artifactId>spring-boot-devtools</artifactId>
-	    <optional>true</optional>
-  </dependency>
+		<dependency>
+	    	<groupId>org.springframework.boot</groupId>
+     		<artifactId>spring-boot-devtools</artifactId>
+	    	<optional>true</optional>
+  		</dependency>
   
-  <dependency>
+  		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		 <dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-data-jpa</artifactId>
- 			 </dependency>
+ 		</dependency>
       
        
-  <dependency>
+ 		 <dependency>
 		    <groupId>org.postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 		    <version>9.4-1200-jdbc41</version>
 		</dependency>
-  <!-- HIBERNATE CORE -->
-	<dependency>
+  
+  		<!-- HIBERNATE CORE -->
+		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
 		    <version>5.2.3.Final</version>
@@ -75,34 +78,41 @@
 			<version>4.3.5.Final</version>
 		</dependency>
 		
-   <dependency>
-       <groupId>mysql</groupId>
-       <artifactId>mysql-connector-java</artifactId>
-   </dependency>
+   		<dependency>
+      	 	<groupId>mysql</groupId>
+       		<artifactId>mysql-connector-java</artifactId>
+   		</dependency>
 
-   <dependency>
-   	<groupId>org.apache.ant</groupId>
-   	<artifactId>ant</artifactId>
-   	<version>1.9.4</version>
-   </dependency>
-   
-   <!-- Dependency for jwt -->
+	   	<dependency>
+	   		<groupId>org.apache.ant</groupId>
+	   		<artifactId>ant</artifactId>
+	   		<version>1.9.4</version>
+	   	</dependency>
+	   
+	   	<!-- Dependency for jwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.6.0</version>
 		</dependency>
+		
+		<!-- Json dependency -->
+		<dependency>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.2.4</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
-	      	<artifactId>spring-boot-maven-plugin</artifactId>
-       </plugin>
+	      		<artifactId>spring-boot-maven-plugin</artifactId>
+       		</plugin>
 		</plugins>
 
 	</build>
-
-
+	
 </project>

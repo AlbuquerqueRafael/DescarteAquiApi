@@ -1,6 +1,6 @@
 angular.module("daTable").directive("myBody", function($location) {
 	return {
-        templateUrl: '/app/assets/tBodyTemplate.html',
+        templateUrl: '/app/assets/js/daTable/templates/tBodyTemplate.html',
         restrict: "A",
         replace: false,
         require: '^myTable',

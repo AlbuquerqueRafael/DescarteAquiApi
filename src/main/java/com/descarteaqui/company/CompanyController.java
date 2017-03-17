@@ -49,7 +49,9 @@ public class CompanyController {
 	@RequestMapping(value = "/company/create", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> create(@RequestBody Company company){
 		companyService.saveCompany(company);
+		
 		Map<String, Object> model = new HashMap<String, Object>();
+		
 		model.put("Status", "Company was created successfully");
 		
 		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.CREATED);

@@ -22,6 +22,7 @@ import com.descarteaqui.state.State;
 import com.descarteaqui.state.exceptions.InvalidSortableVarPropertyException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 @Service
 public class CompanyService {
@@ -77,13 +78,24 @@ public class CompanyService {
 	}
 	
 	public void saveCompany(Company company){
+		List<String> messages = new ArrayList<String>();
 		
 		if(company.getName() == null || company.getName().equals("")){
-			throw new InvalidDataException("Name of company can't be null or empty");
-		}else if( company.getAdress() == null || company.getAdress().equals("")){
-			throw new InvalidDataException("Adress of company can't be null or empty");
-		}else if(company.getAdress() == null || company.getPhone().equals("")){
-			throw new InvalidDataException("Phone of company can't be null or empty");
+			messages.add("Name of company can't be null or empty");
+		}
+		
+		if( company.getAdress() == null || company.getAdress().equals("")){
+			messages.add("Adress of company can't be null or empty");
+		}
+		
+		if(company.getAdress() == null || company.getPhone().equals("")){
+			messages.add("Phone of company can't be null or empty");
+		}
+		
+		String json = new Gson().toJson(messages);
+		
+		if ( messages.size() > 0){
+			throw new InvalidDataException(json);
 		}
 		
 		companyDAO.save(company);

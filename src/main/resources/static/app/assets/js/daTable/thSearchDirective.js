@@ -1,6 +1,6 @@
 angular.module("daTable").directive("mySearchHeader", function() {
 	return {
-        templateUrl: '/app/assets/thSearchTemplate.html',
+        templateUrl: '/app/assets/js/daTable/templates/thSearchTemplate.html',
         restrict: "A",
         replace: false,
         require: "^myTable",
