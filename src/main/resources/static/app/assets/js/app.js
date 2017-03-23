@@ -19,7 +19,8 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     .when('/company/create', {
     	templateUrl: '/app/company/create.html',
     	controller: 'companyController',
-    	roles: ["USER"]
+    	roles: ["USER"],
+    	css: '/app/assets/css/page.css'
     })
     
     .when('/company/:id/show', {

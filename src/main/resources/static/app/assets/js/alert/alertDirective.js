@@ -1,4 +1,4 @@
-angular.module('descarteaqui').directive(function(){
+angular.module('descarteaqui').directive("alert", function(){
 	return {
         templateUrl: '/app/assets/js/alert/alertTemplate.html',
         restrict: "E",
@@ -6,9 +6,11 @@ angular.module('descarteaqui').directive(function(){
         transclude: true,
         scope: {
         	messages: '=',
-        	type: '='
+        	type: '@'
         },
-        link: function($scope, element, attr){}
+        link: function($scope, element, attr){
+        	console.log($scope.type)
+        }
     };
 	
 });

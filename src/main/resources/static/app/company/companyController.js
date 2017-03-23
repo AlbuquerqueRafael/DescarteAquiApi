@@ -24,7 +24,6 @@ angular.module("descarteaqui").controller("companyController",
 	
 	$scope.create = function(){
 		var company = $scope.company;
-		
 		companyService.create(company).then(function successCallback(response) {
 			$location.path("/");
 		}, function errorCallback(response, error) {

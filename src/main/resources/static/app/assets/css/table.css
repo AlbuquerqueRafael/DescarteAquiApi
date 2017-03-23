@@ -16,8 +16,12 @@ thead input{
   vertical-align: middle !important;
 }
 
+.panel-margins{
+	margin-left: 150px;
+	margin-right: 150px;
+}
 
-/* Change the color of bootstrap hover */
+
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #4DAF7C;
 }

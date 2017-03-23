@@ -1,8 +1,10 @@
-<div my-table 
-	 data="data" 
-	 state="state"
-	 callback-fn="getUserData()" 
-	 class="container table-content">
+<div class="panel panel-primary panel-margins">
+		<div class="panel-heading"><h3>User's Information<h3></div>
+		<div class="panel-body">
+		<div my-table 
+			 data="data" 
+			 state="state"
+			 callback-fn="getUserData()">
 	
 	 <a href="/user/create" class="btn btn-primary">Create</a>
 	 <my-clear-search attr="user"></my-clear-search>
@@ -15,4 +17,6 @@
     	<tbody my-body data="data" show-url='/company/create'></tbody>
 		</table>
 	 <my-pagination total-itens="totalItens"></my-pagination>
-</div>			
+		</div>			
+		</div>
+</div>

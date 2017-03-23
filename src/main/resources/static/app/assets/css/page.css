@@ -1,13 +1,12 @@
-.almostJumbotron{
-  background-color: blue;
+.form-descarteaqui{
+  background-color: white !important;
   background: #DCDCDC;
-  width: 800px;
-  margin-top: 60px;
+  width: 550px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: auto;
   position: relative;
-  padding-top: 50px;
+  padding-top: 30px;
   font-size: 14px;
   text-align: left;
 }
@@ -15,5 +14,18 @@
 .form-group{
 		margin-right: 20px;
 		margin-left: 20px;
+}
 
+.form-descarteaqui-button{
+		margin-right:15px !important;
+		padding-bottom: 15px !important;
+}
+
+.btn-form{
+	 width: 20%;
+}
+
+.form-panel-margin{
+		margin-left: 30%;
+		margin-right: 30%;
 }

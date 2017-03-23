@@ -1,8 +1,11 @@
-<form class="almostJumbotron">
-	<company-form company="company" disable="true"> </company-form>
- <div class=text-right>
- 			<a ng-href="/company/{{currenteId}}/edit" class="btn-primary btn">Edit</a>
-    <button data-ng-click="del()" class="btn-danger btn">Delete</button>
-    <button onclick="history.go(-1);" class="btn-warning btn">Cancel</button>
-	</div>
-</form>
+<div class="panel panel-primary form-panel-margin">
+		<div class="panel-heading"><h4>Show Company<h4></div>
+		<div class="panel-body">		
+					<company-form company="company" disable="false"> </company-form>
+					<div class="text-right form-descarteaqui-button">
+ 					<a ng-href="/company/{{currenteId}}/edit" class="btn-primary btn btn-form">Edit</a>
+   		 <button data-ng-click="del()" class="btn-danger btn btn-form">Delete</button>
+    		<button onclick="history.go(-1);" class="btn-warning btn btn-form">Cancel</button>
+					</div>
+		</div>			
+</div>

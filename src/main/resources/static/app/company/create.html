@@ -1,7 +1,10 @@
-<form class="almostJumbotron">
-	<company-form company="company" disable="false"> </company-form>
- <div class="text-right">
-    <button data-ng-click="create()" class="btn-info btn">Create</button>
-    <button onclick="history.go(-1);" class="btn-danger btn">Cancel</button>
-	</div>
-</form>
+<div class="panel panel-primary form-panel-margin">
+		<div class="panel-heading"><h4>Create New Company<h4></div>
+		<div class="panel-body">		
+					<company-form company="company" disable="false"> </company-form>
+					<div class="text-right form-descarteaqui-button">
+    				<button data-ng-click="create()" class="btn-info btn btn-form">Create</button>
+   				 <button onclick="history.go(-1);" class="btn-danger btn btn-form">Cancel</button>
+						</div>
+		</div>			
+</div>
