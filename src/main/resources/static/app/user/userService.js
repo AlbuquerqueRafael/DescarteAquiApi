@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('descarteaqui').factory('userService', function($http, $window){
+angular.module('descarteaqui').factory('userService', function($http, $window, $location){
     var service = {};
     
     service.getInfo = function(){
@@ -49,6 +49,15 @@ angular.module('descarteaqui').factory('userService', function($http, $window){
 		return $http.post("/user/info", data);
 	}
     
+    service.authUser = function(res){
+    	// setting the Authorization Bearer token with JWT token
+		$http.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
+		// setting the user in AuthService
+		console.log(res)
+		$window.sessionStorage.setItem('user', JSON.stringify(res.data));
+	
+		$location.path('/company');
+    }
 	
 	return service;
 });

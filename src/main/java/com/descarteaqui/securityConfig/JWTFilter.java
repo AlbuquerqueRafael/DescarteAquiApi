@@ -17,15 +17,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.filter.GenericFilterBean;
-
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
 
 /**
  * A generic filter for security. I will check token present in the header.
  * 
- * @author Sarath Muraleedharan
+ * @author Sarath Muraleedharan edited by Rafael Albuquerque
  *
  */
 public class JWTFilter extends GenericFilterBean {
@@ -37,9 +37,9 @@ public class JWTFilter extends GenericFilterBean {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		String authHeader = request.getHeader(AUTHORIZATION_HEADER);
-		System.out.println(authHeader);
+
 		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid Authorization header.");
+			((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
 		} else {
 			try {
 				String token = authHeader.substring(7);
@@ -48,8 +48,9 @@ public class JWTFilter extends GenericFilterBean {
 				SecurityContextHolder.getContext().setAuthentication(getAuthentication(claims));
 				filterChain.doFilter(req, res);
 			} catch (SignatureException e) {
-				System.out.println("ssss");
-				((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+				((HttpServletResponse) res).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			} catch ( ExpiredJwtException e){
+				((HttpServletResponse) res).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			}
 
 		}

@@ -12,7 +12,7 @@ angular.module("descarteaqui").controller("companyController",
 	$scope.getCompanyData = function(){
 		var state = $scope.state;
 		var company = $scope.company;
-		console.log($scope.state)
+		
 		companyService.getAllCompanies(company, state).then(function successCallback(response) {
 			$scope.data = response.data.company;
 			$scope.totalItens = response.data.size;

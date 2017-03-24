@@ -60,6 +60,7 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
         enabled: true,
         requireBase: false
     });
+    
 })
 
 .run(function($rootScope, $location, $http, userService){
@@ -75,7 +76,6 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     }
 	
 	if(user !== null){
-		console.log(user.token)
     	$http.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
     }
 	

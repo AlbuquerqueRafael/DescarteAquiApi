@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				// disabling the CSRF - Cross Site Request Forgery
 				.csrf().disable();
+		
 	}
 
 }

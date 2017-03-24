@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 /**
  * Model class for application user
  * 
- * @author Sarath Muraleedharan edited by Rafael
+ * @author Sarath Muraleedharan edited by Rafael Albuquerque
  *
  */
 @Entity

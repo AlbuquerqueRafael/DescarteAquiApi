@@ -14,30 +14,23 @@ angular.module('descarteaqui').controller('userController',
 	// method for login
 	$scope.login = function() {
 		// requesting the token by usename and passoword
-		userService.login($scope.user.mail, $scope.user.password)
-			.success(function(res) {
+		userService.login($scope.user.mail, $scope.user.password).then(function(res) {
 				$scope.password = null;
 				// checking if the token is available in the response
-				if (res.token) {
-					$scope.message = '';
-					// setting the Authorization Bearer token with JWT token
-					$http.defaults.headers.common['Authorization'] = 'Bearer ' + res.token;
-					console.log(res.token)
-					// setting the user in AuthService
-					$window.sessionStorage.setItem('user', JSON.stringify(res));
-				
-					$rootScope.$broadcast('LoginSuccessful');
-					$location.path('/company');
-					// going to the home page
+				if (res.data.token) {
+					userService.authUser(res)
 				} else {
 					// if the token is not present in the response then the
 					// authentication was not successful. Setting the error message.
-					$scope.message = 'Authetication Failed !';
+					$scope.messages = []
+					// if authentication was not successful. Setting the error message.
+					$scope.messages.push(response.data.error)
 				}
-			}).error(function(error) {
-				console.log(error)
+			}, function errorCallback(response)  {
+	
+				$scope.messages = []
 				// if authentication was not successful. Setting the error message.
-				$scope.message = 'Authetication Failed !';
+				$scope.messages.push(response.data.error)
 			});
 	};
 	

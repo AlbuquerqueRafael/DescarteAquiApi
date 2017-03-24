@@ -8,9 +8,7 @@ angular.module('descarteaqui').directive("alert", function(){
         	messages: '=',
         	type: '@'
         },
-        link: function($scope, element, attr){
-        	console.log($scope.type)
-        }
+        link: function($scope, element, attr){}
     };
 	
 });

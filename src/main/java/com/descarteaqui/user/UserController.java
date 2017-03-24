@@ -3,7 +3,6 @@ package com.descarteaqui.user;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.descarteaqui.state.State;
 import com.descarteaqui.state.StateService;
 import com.fasterxml.jackson.databind.JsonNode;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 public class UserController {
@@ -87,40 +83,17 @@ public class UserController {
 		return appUserRepository.findByUsername(loggedUsername);
 	}
 
-	/**
-	 * @param username
-	 * @param password
-	 * @param response
-	 * @return JSON contains token and user after success authentication.
-	 * @throws IOException
-	 */
-	
-	@RequestMapping(value = "/user/n", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> create(){
-		
-		System.out.println("gggu");
-		return null;
-	}
-	
 	
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, Object>> login(@RequestParam String username, 
 							 @RequestParam String password) throws IOException {
 		
-		String token = null;
 		AppUser appUser = appUserRepository.findByUsername(username);
 		Map<String, Object> tokenMap = new HashMap<String, Object>();
-		//Checks if exists an user
-		if (appUser != null && appUser.getPassword().equals(password)) {
-			token = Jwts.builder().setSubject(username).claim("roles", appUser.getRoles()).setIssuedAt(new Date())
-					.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
-			tokenMap.put("token", token);
-			tokenMap.put("user", appUser);
-			return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
-		} else {
-			tokenMap.put("token", null);
-			return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.UNAUTHORIZED);
-		}
+		
+		tokenMap = userService.checkAuth(appUser, password, username);
+		
+		return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
 
 	}
 }

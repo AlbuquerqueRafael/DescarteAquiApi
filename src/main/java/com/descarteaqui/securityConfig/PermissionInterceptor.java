@@ -42,7 +42,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		if(user.getIsAdmin()){
 			return true;
 		}
-		
+				
 		//Checks if the user has the permission role attached to the method
 		try{
 			Method method = handlerMethod.getMethod();

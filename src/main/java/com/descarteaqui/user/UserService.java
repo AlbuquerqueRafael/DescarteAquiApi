@@ -2,6 +2,8 @@ package com.descarteaqui.user;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +19,12 @@ import com.descarteaqui.company.exceptions.CompanyJsonNotFoundException;
 import com.descarteaqui.company.exceptions.InvalidCompanyAttributeException;
 import com.descarteaqui.state.State;
 import com.descarteaqui.state.exceptions.InvalidSortableVarPropertyException;
+import com.descarteaqui.user.exceptions.InvalidUserInfoException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class UserService {
@@ -72,5 +78,27 @@ public class UserService {
 		
 		return model;
 	
+	}
+	
+	public Map<String, Object> checkAuth(AppUser appUser, String password, String username){
+		Map<String, Object> tokenMap = new HashMap<String, Object>();
+		String token = null;
+		
+		if (appUser != null && appUser.getPassword().equals(password)) {
+			//5 days expiration time
+			Calendar calendar = Calendar.getInstance(); 
+			calendar.add(Calendar.DAY_OF_MONTH, 5);
+			
+			token = Jwts.builder().setSubject(username).claim("roles", appUser.getRoles())
+					.setIssuedAt(new Date())
+					.setExpiration(calendar.getTime())
+					.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+			tokenMap.put("token", token);
+			tokenMap.put("user", appUser);
+		} else {
+			throw new InvalidUserInfoException("Invalid username or login");
+		}
+		
+		return tokenMap;
 	}
 }
