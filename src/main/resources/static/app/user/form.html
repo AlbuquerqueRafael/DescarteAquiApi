@@ -1,25 +1,62 @@
 <div class="form-group">
  <label for="email">Username:</label>
- <input type="text" class="form-control" id="name" data-ng-model="user.name" ng-disabled={{disable}}>
-</div>
-<div class="form-group">
-  <label for="adr">User email:</label>
-  <input type="text" class="form-control" id="email" data-ng-model="user.email" ng-disabled={{disable}}>
-</div>
-<div class="form-group">
-  <label class="btn btn-success active">
-   <input type="checkbox" autocomplete="off" checked>
-   <span class="glyphicon glyphicon-ok"></span>
-  </label>
-  <label for="adr">isAdmin:</label>
-   <label class="btn btn-success active">
-   <input type="checkbox" autocomplete="off" checked>
-   <span class="glyphicon glyphicon-ok"></span>
-  </label>
-</div>
-<div class="form-group">
-  <label for="pwd">User roles:</label>
-  <input type="text" class="form-control" id="pwd" data-ng-model="user.roles" ng-disabled={{disable}}>
+ <input type="text" class="form-control" data-ng-model="user.name" ng-disabled={{disable}}>
 </div>
 
-<input type="checkbox" id="isAdmin" data-ng-model="isAdmin" ng-disabled={{disable}}>
+<div class="form-group">
+  <label for="adr">User email:</label>
+  <input type="text" class="form-control" data-ng-model="user.email" ng-disabled={{disable}}>
+</div>
+
+<div class="form-group" ng-show="!{{disable}}">
+  <label for="adr">Password:</label>
+  <input type="password" class="form-control" data-ng-model="user.password" ng-disabled={{disable}}>
+</div>
+
+<div class="form-group" ng-show="!{{disable}}">
+  <label for="adr">Repeat Password:</label>
+  <input type="password" class="form-control" data-ng-model="user.repeatPassword" ng-disabled={{disable}}>
+</div>
+
+<div class="form-group">
+	 <div class="btn-group"
+	 		style="margin-top:5px">
+	     <label class="btn btn-primary" 
+	     			style="height:33px"
+	     			ng-init="isAdmin=false" 
+	     			ng-click="isAdmin=isAdmin ? false : true"
+	     			ng-disabled={{disable}}>
+	       <span>
+	       <i ng-show="isAdmin" class="user-form-checkbox-icon fa fa-check" aria-hidden="true"></i></span>
+	     </label>
+	     <label class="btn btn-default active">
+	        isAdmin
+	     </label>
+	 </div>
+</div>
+
+<div ng-show="!isAdmin">
+	<div class="form-group">
+	  <label for="pwd">User roles:</label>
+	  <div>
+	  	<select class="form-control" ng-model="role" ng-options="o as o for o in roles | orderBy:'toString()'" >
+	  		<option value="" disabled selected style="display: none;"> -- Please Select -- </option>
+	  	</select>
+	  </div>
+	  <button data-ng-click="addRoles(role)" class="form-control btn-primary"> Add role</button>
+	</div>
+	
+	<div class="user-listview-selectedroles">
+	  <div class="list-group">
+	    <li ng-repeat="rol in selectedRoles"  class="list-group-item clearfix">
+	      <i class="fa fa-file" aria-hidden="true"></i>
+	      {{rol}}
+	      <span class="pull-right">
+	        <button data-ng-click="removeRoles(rol)" class="btn btn-xs btn-danger">
+	          <i class="fa fa-trash-o" aria-hidden="true"></i>
+	        </button>
+	      </span>
+	    </li>
+	  </div>
+	</div>
+</div>

@@ -12,7 +12,7 @@ angular.module("daTable").directive("myBody", function($location) {
         link: function($scope, element, attr, myTable){
         	
         	$scope.route = function(row){
-        		$location.path("/company/" + row.id + "/show");
+        		$location.path($scope.showUrl + "/" + row.id + "/show");
         	}
         	
         }

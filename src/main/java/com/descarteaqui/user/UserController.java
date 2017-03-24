@@ -14,12 +14,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.descarteaqui.annotation.Permission;
 import com.descarteaqui.state.State;
 import com.descarteaqui.state.StateService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -95,5 +97,31 @@ public class UserController {
 		
 		return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
 
+	}
+	
+	@RequestMapping(value = "/user/{id}/show", method = RequestMethod.PUT)
+	public AppUser show(@PathVariable("id") Long id) {
+		return userService.getCompanyById(id);
+	}
+	
+	@Permission(roles={"USER"})
+	@RequestMapping(value = "/user/edit", method = RequestMethod.PUT)
+	public ResponseEntity<Map<String, Object>> edit(@RequestBody AppUser user) {
+		userService.saveCompany(user);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("Status", "User was updated successfully");
+		
+		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
+	}
+	
+	@Permission(roles={"USER"})
+	@RequestMapping(value = "/user/{id}/delete", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id) {
+		String result = userService.deleteCompanyById(id);
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("result", result);
+		
+		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
 	}
 }

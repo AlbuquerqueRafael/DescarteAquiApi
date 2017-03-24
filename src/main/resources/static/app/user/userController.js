@@ -52,6 +52,17 @@ angular.module('descarteaqui').controller('userController',
 		});
 	}
 	
+	if($scope.currenteId !== undefined){
+		userService.getCompanyById($scope.currenteId).then(function successCallback(response) {
+			$scope.user = response.data;
+			$scope.user.email = response.data.username;
+		}, function errorCallback(response) {
+			console.log(response);
+			console.log(response.data.error);
+			$location.path("/");
+		});
+	}
+	
 	
 	
 });

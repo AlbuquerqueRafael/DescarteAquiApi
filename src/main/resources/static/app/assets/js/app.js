@@ -46,7 +46,19 @@ angular.module("descarteaqui", ['daTable', 'ngRoute'])
     	roles: ["USER"]
     })
     
-    .when('/user/create', {
+    .when('/user/:id/show', {
+    	templateUrl: '/app/user/show.html',
+    	controller: 'userController',
+    	roles: ["USER"]
+    })
+    
+     .when('/user/:id/edit', {
+    	templateUrl: '/app/user/edit.html',
+    	controller: 'userController',
+    	roles: ["USER"]
+    })
+    
+     .when('/user/create', {
     	templateUrl: '/app/user/create.html',
     	controller: 'userController',
     	roles: ["USER"]

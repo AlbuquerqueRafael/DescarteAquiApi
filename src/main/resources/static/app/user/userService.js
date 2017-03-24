@@ -53,11 +53,22 @@ angular.module('descarteaqui').factory('userService', function($http, $window, $
     	// setting the Authorization Bearer token with JWT token
 		$http.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.token;
 		// setting the user in AuthService
-		console.log(res)
 		$window.sessionStorage.setItem('user', JSON.stringify(res.data));
 	
 		$location.path('/company');
     }
+    
+    service.getCompanyById = function(id){
+		return $http.put("/user/" + id + "/show");
+	}
+	
+	service.deleteById = function(id){
+		return $http.delete("/user/" + id + "/delete");
+	}
+	
+	service.update = function(company){
+		return $http.put("/user/edit", company);
+	}
 	
 	return service;
 });

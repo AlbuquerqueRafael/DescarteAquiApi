@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 
 import com.descarteaqui.company.exceptions.CompanyJsonNotFoundException;
 import com.descarteaqui.company.exceptions.InvalidCompanyAttributeException;
+import com.descarteaqui.general.IdNotFoundException;
+import com.descarteaqui.general.InvalidDataException;
 import com.descarteaqui.state.State;
 import com.descarteaqui.state.exceptions.InvalidSortableVarPropertyException;
 import com.descarteaqui.user.exceptions.InvalidUserInfoException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -100,5 +103,51 @@ public class UserService {
 		}
 		
 		return tokenMap;
+	}
+	
+	public void saveCompany(AppUser user){
+		List<String> messages = new ArrayList<String>();
+		
+		if(user.getName() == null || user.getName().equals("")){
+			messages.add("Name of user can't be null or empty");
+		}
+		
+		if(user.getUsername() == null || user.getUsername().equals("")){
+			messages.add("Email of user can't be null or empty");
+		}
+		
+		
+		String json = new Gson().toJson(messages);
+		
+		if ( messages.size() > 0){
+			throw new InvalidDataException(json);
+		}
+		
+		userDAO.save(user);
+		
+	}
+	
+	public AppUser getCompanyById(Long id){
+		AppUser user = userDAO.findById(id);
+		
+		if(user == null){
+			throw new IdNotFoundException("Id was not found");
+		}
+		
+		return user;
+	}
+	
+	public String deleteCompanyById(Long id){
+		AppUser user = userDAO.findById(id);
+		String email = "";
+		
+		if(user == null){
+			throw new IdNotFoundException("Id was not found");
+		}else{
+			email = user.getUsername();
+			userDAO.delete(id);
+		}
+		
+		return "User with email " + email + " was successfully deleted";
 	}
 }
