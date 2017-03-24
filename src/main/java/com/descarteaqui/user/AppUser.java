@@ -44,7 +44,7 @@ public class AppUser implements UserDetails {
 	@ElementCollection
 	private List<String> roles = new ArrayList<>();
 	
-	@JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "admin")
 	private boolean isAdmin;
 	

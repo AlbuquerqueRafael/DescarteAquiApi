@@ -6,12 +6,16 @@ angular.module("descarteaqui").directive("userForm", function(companyService) {
         transclude: true,
         scope: {
         	user: '=',
+        	messages: '=',
         	disable: '@'
         },
         link: function($scope, element, attr){
         	$scope.roles = ['USER', 'TESTE', 'AINDA TESTANDO'];
-        	$scope.selectedRoles = []
-        
+        	if(!$scope.user.roles){
+        		$scope.user.roles = []
+        	}
+     
+        	$scope.user.isAdmin = false;
         	
         	$scope.addRoles = function(role){
         		if ( role != undefined){
@@ -19,27 +23,33 @@ angular.module("descarteaqui").directive("userForm", function(companyService) {
 	        		var auxRole = $scope.roles[index];
 	        		
 	        		$scope.roles.splice(index, 1)
-	        		$scope.selectedRoles.push(auxRole);
+	        		$scope.user.roles.push(auxRole);
         		}
         	}
         	
         	$scope.removeRoles = function(role){
         		console.log(role)
-        		var index = $scope.selectedRoles.indexOf(role);
-        		var auxRole = $scope.selectedRoles[index];
+        		var index = $scope.user.roles.indexOf(role);
+        		var auxRole = $scope.user.roles[index];
         		
-        		$scope.selectedRoles.splice(index, 1)
+        		$scope.user.roles.splice(index, 1)
         		$scope.roles.push(auxRole);
         		
         	}
         	
         	$scope.$parent.$watch('user', function(newValue, oldValue) {
         		if (newValue !== oldValue) {
-        			console.log($scope.user)
+        			
         			for (index in $scope.user.roles){
         				if($scope.user.roles[index] === 'ADMIN'){
         					$scope.isAdmin = true
         				}
+        			}
+        			
+        			if($scope.isAdmin){
+        				for (index in $scope.user.roles){
+            				$scope.addRoles($scope.user.roles[index])
+            			}
         			}
     			}
         	});

@@ -66,8 +66,12 @@ angular.module('descarteaqui').factory('userService', function($http, $window, $
 		return $http.delete("/user/" + id + "/delete");
 	}
 	
-	service.update = function(company){
-		return $http.put("/user/edit", company);
+	service.update = function(user){
+		return $http.put("/user/edit", user);
+	}
+	
+	service.save = function(user){
+		return $http.post("/user/register", user);
 	}
 	
 	return service;

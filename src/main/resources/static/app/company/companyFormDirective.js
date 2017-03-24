@@ -6,6 +6,7 @@ angular.module("descarteaqui").directive("companyForm", function(companyService)
         transclude: true,
         scope: {
         	company: '=',
+        	messages: '=',
         	disable: '@'
         },
         link: function($scope, element, attr){}

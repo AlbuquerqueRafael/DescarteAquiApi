@@ -32,7 +32,7 @@ angular.module("descarteaqui").controller("companyController",
 	}
 	
 	if($scope.currenteId !== undefined){
-		console.log($routeParams)
+
 		companyService.getCompanyById($scope.currenteId).then(function successCallback(response) {
 			$scope.company = response.data;
 		}, function errorCallback(response) {
@@ -58,7 +58,7 @@ angular.module("descarteaqui").controller("companyController",
 			console.log(response.data.result);
 			$location.path("/company/" + $scope.currenteId + "/show");
 		}, function errorCallback(response) {
-			console.log(response);
+			$scope.messages = JSON.parse(response.data.error)
 		});
 	}
 	

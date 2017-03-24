@@ -1,3 +1,4 @@
+<alert messages="messages" type="danger"> </alert>
 <div class="form-group">
  <label for="email">Username:</label>
  <input type="text" class="form-control" data-ng-model="user.name" ng-disabled={{disable}}>
@@ -5,7 +6,7 @@
 
 <div class="form-group">
   <label for="adr">User email:</label>
-  <input type="text" class="form-control" data-ng-model="user.email" ng-disabled={{disable}}>
+  <input type="text" class="form-control" data-ng-model="user.username" ng-disabled={{disable}}>
 </div>
 
 <div class="form-group" ng-show="!{{disable}}">
@@ -22,12 +23,11 @@
 	 <div class="btn-group"
 	 		style="margin-top:5px">
 	     <label class="btn btn-primary" 
-	     			style="height:33px"
-	     			ng-init="isAdmin=false" 
-	     			ng-click="isAdmin=isAdmin ? false : true"
+	     			style="height:33px" 
+	     			ng-click="user.isAdmin=user.isAdmin? false : true"
 	     			ng-disabled={{disable}}>
 	       <span>
-	       <i ng-show="isAdmin" class="user-form-checkbox-icon fa fa-check" aria-hidden="true"></i></span>
+	       <i ng-show="user.isAdmin" class="user-form-checkbox-icon fa fa-check" aria-hidden="true"></i></span>
 	     </label>
 	     <label class="btn btn-default active">
 	        isAdmin
@@ -35,7 +35,7 @@
 	 </div>
 </div>
 
-<div ng-show="!isAdmin">
+<div ng-show="!user.isAdmin">
 	<div class="form-group">
 	  <label for="pwd">User roles:</label>
 	  <div>
@@ -48,7 +48,7 @@
 	
 	<div class="user-listview-selectedroles">
 	  <div class="list-group">
-	    <li ng-repeat="rol in selectedRoles"  class="list-group-item clearfix">
+	    <li ng-repeat="rol in user.roles"  class="list-group-item clearfix">
 	      <i class="fa fa-file" aria-hidden="true"></i>
 	      {{rol}}
 	      <span class="pull-right">

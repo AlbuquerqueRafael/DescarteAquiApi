@@ -88,7 +88,7 @@ public class CompanyService {
 			messages.add("Adress of company can't be null or empty");
 		}
 		
-		if(company.getAdress() == null || company.getPhone().equals("")){
+		if(company.getPhone() == null || company.getPhone().equals("")){
 			messages.add("Phone of company can't be null or empty");
 		}
 		

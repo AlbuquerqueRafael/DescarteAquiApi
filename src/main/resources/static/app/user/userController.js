@@ -63,6 +63,20 @@ angular.module('descarteaqui').controller('userController',
 		});
 	}
 	
+	$scope.create = function(){
+		if($scope.user.password !== $scope.user.repeatPassword){
+			$scope.messages = ['Password and Repeat Password doesn\'t match']
+		}else{
+			userService.save($scope.user).then(function successCallback(response) {
+				console.log("Works")
+				console.log(response)
+			}, function errorCallback(response) {
+				$scope.messages = ['Password and Repeat Password doesn\'t match']
+			});	
+		}
+		
+	}
+	
 	
 	
 });

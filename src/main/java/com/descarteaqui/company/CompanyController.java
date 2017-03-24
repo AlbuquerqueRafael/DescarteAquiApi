@@ -31,7 +31,7 @@ public class CompanyController {
 	private StateService tableStateService;
 	
 	@RequestMapping(value = "/company", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> getHelloWorld(@RequestBody String searchData) 
+	public ResponseEntity<Map<String, Object>> getCompanys(@RequestBody String searchData) 
 			throws IOException{
 		Map<String, Object> model = new HashMap<String, Object>();
 

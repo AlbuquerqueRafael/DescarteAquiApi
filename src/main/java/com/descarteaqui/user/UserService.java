@@ -105,8 +105,11 @@ public class UserService {
 		return tokenMap;
 	}
 	
-	public void saveCompany(AppUser user){
+	public void saveUser(AppUser user){
 		List<String> messages = new ArrayList<String>();
+		if (userDAO.findByUsername(user.getUsername()) != null) {
+			messages.add("Email already exists");
+		}
 		
 		if(user.getName() == null || user.getName().equals("")){
 			messages.add("Name of user can't be null or empty");

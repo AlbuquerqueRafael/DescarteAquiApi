@@ -2,9 +2,7 @@ package com.descarteaqui.user;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -60,16 +58,16 @@ public class UserController {
 	 * @param appUser
 	 * @return
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<AppUser> createUser(@RequestBody AppUser appUser) {
-		if (appUserRepository.findByUsername(appUser.getUsername()) != null) {
-			throw new RuntimeException("Username already exist");
-		}
+	@RequestMapping(value = "/user/register", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> createUser(@RequestBody AppUser user) {
+		userService.saveUser(user);
 		
-		List<String> roles = new ArrayList<>();
-		roles.add("USER");
-		appUser.setRoles(roles);
-		return new ResponseEntity<AppUser>(appUserRepository.save(appUser), HttpStatus.CREATED);
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		model.put("Status", "User was created successfully");
+		
+		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.CREATED);
+
 	}
 
 	/**
@@ -96,7 +94,6 @@ public class UserController {
 		tokenMap = userService.checkAuth(appUser, password, username);
 		
 		return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
-
 	}
 	
 	@RequestMapping(value = "/user/{id}/show", method = RequestMethod.PUT)
@@ -107,7 +104,7 @@ public class UserController {
 	@Permission(roles={"USER"})
 	@RequestMapping(value = "/user/edit", method = RequestMethod.PUT)
 	public ResponseEntity<Map<String, Object>> edit(@RequestBody AppUser user) {
-		userService.saveCompany(user);
+		userService.saveUser(user);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("Status", "User was updated successfully");
 		
@@ -124,4 +121,8 @@ public class UserController {
 		
 		return new ResponseEntity<Map<String, Object>>(model, HttpStatus.OK);
 	}
-}
+	
+	
+	
+	
+}	

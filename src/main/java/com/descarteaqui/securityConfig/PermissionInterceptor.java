@@ -31,7 +31,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 	    
 	    if(handlerMethod.getMethod().getName().equals("error") ||
 	       handlerMethod.getMethod().getName().equals("login")	||
-	       handlerMethod.getMethod().getName().equals("register")){
+	       handlerMethod.getMethod().getName().equals("createUser")){
 	    	return true;
 	    }
 	    
