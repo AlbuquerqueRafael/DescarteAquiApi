@@ -10,49 +10,60 @@ angular.module("descarteaqui").directive("userForm", function(companyService) {
         	disable: '@'
         },
         link: function($scope, element, attr){
-        	$scope.roles = ['USER'];
-        	
-        	if(!$scope.user.roles){
-        		$scope.user.roles = []
-        	}
-     
-        	$scope.user.isAdmin = false;
-        	
-        	$scope.addRoles = function(role){
-        		if ( role != undefined){
-	    			var index = $scope.roles.indexOf(role);
-	        		var auxRole = $scope.roles[index];
-	        		
-	        		$scope.roles.splice(index, 1)
-	        		$scope.user.roles.push(auxRole);
-        		}
-        	}
-        	
-        	$scope.removeRoles = function(role){
-        		var index = $scope.user.roles.indexOf(role);
-        		var auxRole = $scope.user.roles[index];
-        		
-        		$scope.user.roles.splice(index, 1)
-        		$scope.roles.push(auxRole);
-        		
-        	}
+        	$scope.roles = ['USER', 'COMPANY'];
+        	$scope.isAdmin = false;
         	
         	$scope.$parent.$watch('user', function(newValue, oldValue) {
         		if (newValue !== oldValue) {
-        			
+        		
         			for (index in $scope.user.roles){
         				if($scope.user.roles[index] === 'ADMIN'){
         					$scope.isAdmin = true
+        					$scope.user.roles.splice(index, 1);
+        					break;
+        				}
+        				
+        				var role = $scope.user.roles[index];
+        				var index = $scope.roles.indexOf(role);
+        				
+        				if(index != -1){
+        				  $scope.roles.splice(index, 1);
         				}
         			}
         			
-        			if($scope.isAdmin){
-        				for (index in $scope.user.roles){
-            				$scope.addRoles($scope.user.roles[index])
-            			}
-        			}
     			}
         	});
+        	
+        	$scope.addRoles = function(role){
+        		//Checking the index of role
+        		var index = $scope.roles.indexOf(role);
+        		
+        	
+        		//Push role into list and excluding from select
+        		$scope.user.roles.push(role)
+        		$scope.roles.splice(index, 1)
+        	}
+        	
+        	$scope.removeRoles = function(role){
+        		//Checking the index of role
+        		var index = $scope.user.roles.indexOf(role);
+        	
+        		
+        		//Push role into select and excluding from list
+        		$scope.roles.push(role)
+        		$scope.user.roles.splice(index, 1);
+        	}
+        	
+        	$scope.changeIsAdmin = function(){
+        		if($scope.disable == 'false'){
+	    			if($scope.isAdmin){
+	        			$scope.isAdmin = false;
+	        		}else{
+	        			$scope.isAdmin = true;
+	        		}
+        		}
+        	
+        	}
         }
     };
 });

@@ -4,6 +4,7 @@ angular.module('descarteaqui').controller('userController',
 		function($scope, $http, userService, $window, $rootScope, $location, $routeParams){
 	
 	$scope.user = {}
+	$scope.user.roles = []
 	$scope.data = {}
 	$scope.company = {}
 	$scope.totalItens = 10;
@@ -37,12 +38,12 @@ angular.module('descarteaqui').controller('userController',
 	$scope.getUserData = function(){
 		var state = $scope.state;
 		var user = JSON.parse(JSON.stringify($scope.user));
-		
-		if($scope.user.roles !== undefined){
+
+		if($scope.user.roles.length != 0){
 			user.roles = []
 			user.roles.push($scope.user.roles)
 		}
-	
+		
 		userService.getAllUsers(user, state).then(function successCallback(response) {
 			$scope.data = response.data.user;
 			$scope.totalItens = response.data.size;
@@ -55,6 +56,7 @@ angular.module('descarteaqui').controller('userController',
 	if($scope.currenteId !== undefined){
 		console.log("entrou")
 		userService.getCompanyById($scope.currenteId).then(function successCallback(response) {
+			console.log("Response")
 			console.log(response)
 			$scope.user = response.data;
 			$scope.user.email = response.data.username;
@@ -77,6 +79,31 @@ angular.module('descarteaqui').controller('userController',
 			});	
 		}
 		
+	}
+	
+	$scope.create = function(){
+		if($scope.user.password !== $scope.user.repeatPassword){
+			$scope.messages = ['Password and Repeat Password doesn\'t match']
+		}else{
+			userService.save($scope.user).then(function successCallback(response) {
+				console.log("Works")
+				console.log(response)
+			}, function errorCallback(response) {
+				$scope.messages = ['Password and Repeat Password doesn\'t match']
+			});	
+		}
+		
+	}
+	
+	$scope.update = function(){
+		var user = $scope.user;
+		
+		userService.update(user).then(function successCallback(response) {
+			console.log(response.data.result);
+			$location.path("/user/" + $scope.currenteId + "/show");
+		}, function errorCallback(response) {
+			$scope.messages = JSON.parse(response.data.error)
+		});
 	}
 	
 	

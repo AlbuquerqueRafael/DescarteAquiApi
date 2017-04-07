@@ -1,33 +1,34 @@
 <alert messages="messages" type="danger"> </alert>
+
 <div class="form-group">
  <label for="email">Username:</label>
- <input type="text" class="form-control" data-ng-model="user.name" ng-disabled={{disable}}>
+ <input type="text" class="form-control" data-ng-model="user.name" data-ng-disabled={{disable}}>
 </div>
 
 <div class="form-group">
   <label for="adr">User email:</label>
-  <input type="text" class="form-control" data-ng-model="user.username" ng-disabled={{disable}}>
+  <input type="text" class="form-control" data-ng-model="user.username" data-ng-disabled={{disable}}>
 </div>
 
-<div class="form-group" ng-show="!{{disable}}">
+<div class="form-group" data-ng-show="!{{disable}}">
   <label for="adr">Password:</label>
-  <input type="password" class="form-control" data-ng-model="user.password" ng-disabled={{disable}}>
+  <input type="password" class="form-control" data-ng-model="user.password" data-ng-disabled={{disable}}>
 </div>
 
-<div class="form-group" ng-show="!{{disable}}">
+<div class="form-group" data-ng-show="!{{disable}}">
   <label for="adr">Repeat Password:</label>
-  <input type="password" class="form-control" data-ng-model="user.repeatPassword" ng-disabled={{disable}}>
+  <input type="password" class="form-control" data-ng-model="user.repeatPassword" data-ng-disabled={{disable}}>
 </div>
-{{user.isAdmin}}
+
 <div class="form-group">
 	 <div class="btn-group"
-	 		style="margin-top:5px">
+	 	  style="margin-top:5px">
 	     <label class="btn btn-primary" 
 	     			style="height:33px" 
-	     			ng-click="user.isAdmin=user.isAdmin? false : true"
-	     			ng-disabled={{disable}}>
+	     			data-ng-click="changeIsAdmin()"
+	     			>
 	       <span>
-	       <i ng-show="user.isAdmin" class="user-form-checkbox-icon fa fa-check" aria-hidden="true"></i></span>
+	       <i data-ng-show="isAdmin" class="user-form-checkbox-icon fa fa-check" aria-hidden="true"></i></span>
 	     </label>
 	     <label class="btn btn-default active">
 	        isAdmin
@@ -35,24 +36,25 @@
 	 </div>
 </div>
 
-<div ng-show="!user.isAdmin">
+<div data-ng-show="!isAdmin">
 	<div class="form-group">
 	  <label for="pwd">User roles:</label>
 	  <div>
-	  	<select class="form-control" ng-model="role" ng-options="o as o for o in roles | orderBy:'toString()'" >
+	  	<select class="form-control" data-ng-model="role" data-ng-options="o as o for o in roles | orderBy:'toString()'" >
 	  		<option value="" disabled selected style="display: none;"> -- Please Select -- </option>
 	  	</select>
 	  </div>
-	  <button data-ng-click="addRoles(role)" class="form-control btn-primary"> Add role</button>
+	  <button data-ng-click="addRoles(role)" class="form-control btn-primary"
+	  		  data-ng-disabled={{disable}}> Add role</button>
 	</div>
 	
 	<div class="user-listview-selectedroles">
 	  <div class="list-group">
-	    <li ng-repeat="rol in user.roles"  class="list-group-item clearfix">
+	    <li data-ng-repeat="rol in user.roles" class="list-group-item clearfix">
 	      <i class="fa fa-file" aria-hidden="true"></i>
 	      {{rol}}
 	      <span class="pull-right">
-	        <button data-ng-click="removeRoles(rol)" class="btn btn-xs btn-danger">
+	        <button data-ng-show="!{{disable}}"  data-ng-click="removeRoles(rol)" class="btn btn-xs btn-danger">
 	          <i class="fa fa-trash-o" aria-hidden="true"></i>
 	        </button>
 	      </span>
