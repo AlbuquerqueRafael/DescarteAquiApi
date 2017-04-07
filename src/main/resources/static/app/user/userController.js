@@ -27,7 +27,7 @@ angular.module('descarteaqui').controller('userController',
 					$scope.messages.push(response.data.error)
 				}
 			}, function errorCallback(response)  {
-	
+				console.log(response)
 				$scope.messages = []
 				// if authentication was not successful. Setting the error message.
 				$scope.messages.push(response.data.error)
