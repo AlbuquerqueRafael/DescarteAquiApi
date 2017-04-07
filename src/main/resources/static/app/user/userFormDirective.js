@@ -10,7 +10,8 @@ angular.module("descarteaqui").directive("userForm", function(companyService) {
         	disable: '@'
         },
         link: function($scope, element, attr){
-        	$scope.roles = ['USER', 'TESTE', 'AINDA TESTANDO'];
+        	$scope.roles = ['USER'];
+        	
         	if(!$scope.user.roles){
         		$scope.user.roles = []
         	}
@@ -28,7 +29,6 @@ angular.module("descarteaqui").directive("userForm", function(companyService) {
         	}
         	
         	$scope.removeRoles = function(role){
-        		console.log(role)
         		var index = $scope.user.roles.indexOf(role);
         		var auxRole = $scope.user.roles[index];
         		

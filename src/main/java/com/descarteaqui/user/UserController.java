@@ -98,6 +98,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/{id}/show", method = RequestMethod.PUT)
 	public AppUser show(@PathVariable("id") Long id) {
+		System.out.println(id);
 		return userService.getCompanyById(id);
 	}
 	

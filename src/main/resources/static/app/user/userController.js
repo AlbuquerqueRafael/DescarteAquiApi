@@ -53,7 +53,9 @@ angular.module('descarteaqui').controller('userController',
 	}
 	
 	if($scope.currenteId !== undefined){
+		console.log("entrou")
 		userService.getCompanyById($scope.currenteId).then(function successCallback(response) {
+			console.log(response)
 			$scope.user = response.data;
 			$scope.user.email = response.data.username;
 		}, function errorCallback(response) {
